@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DPromotion 협업 컨설팅 로드맵</title>
+<style>
+  :root {
+    --a: #6C63FF;
+    --a-light: #EEF0FF;
+    --b: #00B89C;
+    --b-light: #E6F7F5;
+    --c: #FF6B6B;
+    --c-light: #FFF0F0;
+    --dark: #1A1A2E;
+    --gray: #6B7280;
+    --light: #F9FAFB;
+    --border: #E5E7EB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', -apple-system, sans-serif;
+    background: #F4F5F7;
+    color: var(--dark);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--dark);
+    color: #fff;
+    padding: 40px 48px 36px;
+  }
+  .header-sub { color: #9CA3AF; font-size: 13px; margin-bottom: 10px; letter-spacing: .04em; text-transform: uppercase; }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: -.02em; }
+  .header p { color: #D1D5DB; margin-top: 8px; font-size: 14px; }
+  .header-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .tag {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #E5E7EB;
+  }
+
+  /* ── First Action Banner ── */
+  .first-action {
+    background: #FFFBEB;
+    border-left: 4px solid #F59E0B;
+    margin: 24px 48px 0;
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .first-action .icon { font-size: 22px; }
+  .first-action strong { color: #92400E; font-size: 13px; display: block; margin-bottom: 2px; }
+  .first-action span { color: #78350F; font-size: 13px; }
+
+  /* ── Content wrap ── */
+  .content { padding: 24px 48px 60px; max-width: 1200px; }
+
+  /* ── Section title ── */
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin: 36px 0 16px;
+  }
+
+  /* ── Gantt Timeline ── */
+  .gantt-wrap {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .gantt-header {
+    display: grid;
+    grid-template-columns: 160px repeat(6, 1fr);
+    background: var(--light);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+  }
+  .gantt-header > div {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray);
+    letter-spacing: .04em;
+  }
+  .gantt-row {
+    display: grid;
+    grid-template-columns: 160px repeat(6, 1fr);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .gantt-row:last-child { border-bottom: none; }
+  .gantt-label {
+    padding: 0 16px;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .track-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .gantt-cell { padding: 0 4px; }
+  .gantt-bar {
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 8px;
+  }
+  .bar-a { background: var(--a); }
+  .bar-b { background: var(--b); }
+  .bar-c { background: var(--c); }
+  .bar-a-light { background: #BDB8FF; }
+  .bar-b-light { background: #6CD9CA; }
+  .bar-c-light { background: #FF9E9E; }
+  .gantt-cell.span2 { grid-column: span 2; }
+  .gantt-cell.span3 { grid-column: span 3; }
+  .gantt-cell.span4 { grid-column: span 4; }
+
+  /* ── Tracks ── */
+  .tracks-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+
+  .track-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .track-card-header {
+    padding: 18px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .track-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .badge-a { background: var(--a-light); color: var(--a); }
+  .badge-b { background: var(--b-light); color: #007A65; }
+  .badge-c { background: var(--c-light); color: #C0392B; }
+
+  .track-card-header h2 { font-size: 17px; font-weight: 700; }
+  .track-card-header p { color: var(--gray); font-size: 13px; margin-top: 4px; }
+
+  .track-body { padding: 20px 24px; }
+
+  /* ── Phase row ── */
+  .phases { display: flex; gap: 12px; flex-wrap: wrap; }
+  .phase {
+    flex: 1;
+    min-width: 200px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+  }
+  .phase-num {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 6px;
+  }
+  .phase h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .phase-period {
+    font-size: 11px;
+    color: var(--gray);
+    margin-bottom: 10px;
+  }
+  .phase-items { list-style: none; }
+  .phase-items li {
+    font-size: 12px;
+    color: #374151;
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .phase-items li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--gray);
+    font-weight: 700;
+  }
+  .phase-kpi {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  .kpi-a { background: var(--a-light); }
+  .kpi-b { background: var(--b-light); }
+  .kpi-c { background: var(--c-light); }
+  .phase-kpi .kpi-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 4px;
+  }
+  .phase-kpi .kpi-num {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .kpi-num-a { color: var(--a); }
+  .kpi-num-b { color: #007A65; }
+  .kpi-num-c { color: #C0392B; }
+
+  /* Phase connector arrow */
+  .phase-arrow {
+    display: flex;
+    align-items: center;
+    color: #D1D5DB;
+    font-size: 20px;
+    flex-shrink: 0;
+    padding-top: 40px;
+  }
+
+  /* ── Target Brands ── */
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .brand-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    position: relative;
+  }
+  .brand-card.priority {
+    border-color: var(--a);
+    background: var(--a-light);
+  }
+  .brand-name { font-size: 12px; font-weight: 700; }
+  .brand-date { font-size: 11px; color: var(--gray); margin-top: 2px; }
+  .brand-tag {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    background: #E5E7EB;
+    color: #374151;
+  }
+  .brand-tag.hot { background: #FEE2E2; color: #991B1B; }
+
+  /* ── Campaign Cards (Track B) ── */
+  .campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 12px;
+  }
+  .campaign-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: box-shadow .2s;
+  }
+  .campaign-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+  .campaign-icon { font-size: 24px; margin-bottom: 10px; }
+  .campaign-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .campaign-card .brands { font-size: 11px; color: var(--gray); margin-bottom: 10px; }
+  .campaign-flow {
+    background: var(--light);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: #374151;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  .kpi-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .kpi-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+  }
+  .kpi-item .label { color: var(--gray); }
+  .kpi-item .val { font-weight: 700; color: var(--dark); }
+  .kpi-item .val.green { color: #007A65; }
+
+  /* ── Funnel (Track C) ── */
+  .funnel-wrap {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .funnel-col { display: flex; flex-direction: column; gap: 10px; }
+  .funnel-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding-top: 20px;
+  }
+  .funnel-arrow { font-size: 32px; color: #D1D5DB; }
+  .funnel-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gray); }
+
+  .channel-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .channel-card .ch-name { font-size: 12px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .ch-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+  .ch-target {
+    background: var(--c-light);
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-top: 6px;
+  }
+  .ch-target .t-label { font-size: 10px; color: var(--gray); }
+  .ch-target .t-val { font-size: 13px; font-weight: 700; color: #C0392B; }
+
+  .popup-box {
+    background: linear-gradient(135deg, #6C63FF, #9F8FFF);
+    border-radius: 12px;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+  }
+  .popup-box .pb-title { font-size: 12px; font-weight: 600; opacity: .85; margin-bottom: 12px; letter-spacing: .04em; }
+  .popup-box .pb-main { font-size: 28px; font-weight: 800; line-height: 1.2; }
+  .popup-box .pb-sub { font-size: 12px; opacity: .75; margin-top: 6px; }
+  .popup-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .popup-stat {
+    background: rgba(255,255,255,.15);
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+  }
+  .popup-stat .s-num { font-size: 16px; font-weight: 800; }
+  .popup-stat .s-label { font-size: 10px; opacity: .75; }
+
+  /* ── Big KPI row ── */
+  .kpi-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .kpi-box {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .kpi-box .kb-val { font-size: 22px; font-weight: 800; }
+  .kb-a { color: var(--a); }
+  .kb-b { color: #007A65; }
+  .kb-c { color: #C0392B; }
+  .kpi-box .kb-label { font-size: 11px; color: var(--gray); margin-top: 4px; }
+  .kpi-box .kb-period { font-size: 10px; color: #D1D5DB; margin-top: 2px; }
+
+  /* ── Cascade box ── */
+  .cascade {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+  .cascade-title { font-size: 11px; font-weight: 700; color: var(--gray); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+  .cascade-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    font-size: 12px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .cascade-row:last-child { border-bottom: none; }
+  .cascade-num { font-weight: 700; font-size: 14px; min-width: 80px; }
+  .cascade-arrow { color: #D1D5DB; }
+  .cascade-desc { color: var(--gray); }
+  .cascade-rate { margin-left: auto; font-size: 11px; color: #9CA3AF; }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .header, .content { padding-left: 20px; padding-right: 20px; }
+    .first-action { margin-left: 20px; margin-right: 20px; }
+    .phases { flex-direction: column; }
+    .phase-arrow { display: none; }
+    .funnel-wrap { grid-template-columns: 1fr; }
+    .funnel-center { flex-direction: row; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="header">
+  <div class="header-sub">DPromotion × 협업 컨설팅</div>
+  <h1>K-뷰티 Japan OMO 실전 로드맵</h1>
+  <p>뷰티 MD 15년 × 이커머스 15년 × 일본어 — 수치로 증명하는 컨설팅</p>
+  <div class="header-tags">
+    <span class="tag">일본어 가능</span>
+    <span class="tag">이커머스 15년</span>
+    <span class="tag">뷰티 MD</span>
+    <span class="tag">마케팅 / 광고</span>
+    <span class="tag">DPromotion OMO 플랫폼</span>
+  </div>
+</div>
+
+<!-- ── First Action ── -->
+<div class="first-action">
+  <div class="icon">⚡</div>
+  <div>
+    <strong>D-Day 첫 번째 행동</strong>
+    <span>내일부터 DPromotion 에디터 실습 시작 + 롬앤 일본 Instagram DM 초안 작성 → 파일럿 수주까지 최대 <strong>6주</strong></span>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ── Timeline Gantt ── -->
+  <div class="section-title">전체 타임라인</div>
+  <div class="gantt-wrap">
+    <div class="gantt-header">
+      <div style="text-align:left; padding-left:16px;">트랙</div>
+      <div>Week 1-2</div>
+      <div>Week 3-4</div>
+      <div>Week 5-8</div>
+      <div>Week 9-12</div>
+      <div>Month 4-5</div>
+      <div>Month 6</div>
+    </div>
+
+    <!-- Track A -->
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <div class="track-dot" style="background:var(--a)"></div>
+        Track A<br><span style="font-weight:400; font-size:11px; color:var(--gray)">K-뷰티 영업</span>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-a" style="font-size:10px">준비 · 선별</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-a" style="font-size:10px">DM · 미팅</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-a" style="font-size:10px">파일럿 실행</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-a-light" style="font-size:10px">사례 → 확장</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-a-light" style="font-size:10px">정기 계약 3건</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-a-light" style="font-size:10px">정기 6건</div>
+      </div>
+    </div>
+
+    <!-- Track B -->
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <div class="track-dot" style="background:var(--b)"></div>
+        Track B<br><span style="font-weight:400; font-size:11px; color:var(--gray)">캠페인 운영</span>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-b" style="font-size:10px">템플릿 구축</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-b" style="font-size:10px">카피 라이브러리</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-b" style="font-size:10px">파일럿 캠페인</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-b" style="font-size:10px">A/B 테스트</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-b-light" style="font-size:10px">월 5회 운영</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-b-light" style="font-size:10px">월 10회</div>
+      </div>
+    </div>
+
+    <!-- Track C -->
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <div class="track-dot" style="background:var(--c)"></div>
+        Track C<br><span style="font-weight:400; font-size:11px; color:var(--gray)">이커머스 O2O</span>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar" style="background:#E5E7EB; color:#9CA3AF; font-size:10px">대기</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar" style="background:#E5E7EB; color:#9CA3AF; font-size:10px">대기</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar" style="background:#E5E7EB; color:#9CA3AF; font-size:10px">채널 감사</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-c" style="font-size:10px">라쿠텐·아마존</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-c" style="font-size:10px">광고 최적화</div>
+      </div>
+      <div class="gantt-cell">
+        <div class="gantt-bar bar-c-light" style="font-size:10px">ROAS 4.0x</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       TRACK A
+  ══════════════════════════════ -->
+  <div class="section-title" style="margin-top: 44px;">Track A — K-뷰티 브랜드 신규 영업</div>
+  <div class="track-card">
+    <div class="track-card-header">
+      <span class="track-badge badge-a">TRACK A</span>
+      <div>
+        <h2>K-뷰티 브랜드 신규 영업 + OMO 시나리오 기획</h2>
+        <p>팝업 운영 브랜드를 첫 타겟으로 파일럿 1건 수주 → 성공사례 → 확장 영업</p>
+      </div>
+    </div>
+    <div class="track-body">
+
+      <!-- Phases -->
+      <div class="phases">
+        <!-- Phase 0 -->
+        <div class="phase">
+          <div class="phase-num">Phase 0</div>
+          <h3>내부 준비</h3>
+          <div class="phase-period">1~2주차</div>
+          <ul class="phase-items">
+            <li>에디터 실습: 룰렛·퀴즈·스탬프 3개 완성</li>
+            <li>A등급 브랜드 9개 선별 + 등급 분류</li>
+            <li>일본어 제안서 템플릿 1종 완성</li>
+            <li>과거 성과 데이터 내부 수집</li>
+          </ul>
+          <div class="phase-kpi kpi-a">
+            <div class="kpi-label">Phase 목표</div>
+            <div class="kpi-num kpi-num-a">데모 캠페인 5개<br>제안서 템플릿 1종</div>
+          </div>
+        </div>
+
+        <div class="phase-arrow">›</div>
+
+        <!-- Phase 1 -->
+        <div class="phase">
+          <div class="phase-num">Phase 1</div>
+          <h3>첫 접촉</h3>
+          <div class="phase-period">3~4주차</div>
+          <ul class="phase-items">
+            <li>LinkedIn + Instagram DM 동시 접근</li>
+            <li>일본어 DM 스크립트 발송</li>
+            <li>30분 미팅 아젠다 준비</li>
+            <li>오프라인 이벤트 현장 접근 병행</li>
+          </ul>
+          <div class="phase-kpi kpi-a">
+            <div class="kpi-label">Phase 목표</div>
+            <div class="kpi-num kpi-num-a">9개 접촉<br>응답 4개 (44%)<br>미팅 성사 2건</div>
+          </div>
+        </div>
+
+        <div class="phase-arrow">›</div>
+
+        <!-- Phase 2 -->
+        <div class="phase">
+          <div class="phase-num">Phase 2</div>
+          <h3>파일럿 실행</h3>
+          <div class="phase-period">5~8주차</div>
+          <ul class="phase-items">
+            <li>롬앤 컬러 룰렛 캠페인 1회</li>
+            <li>현장 QR 배치 + 스태프 브리핑</li>
+            <li>실시간 대시보드 모니터링</li>
+            <li>D+3 성과 리포트 제출</li>
+          </ul>
+          <div class="phase-kpi kpi-a">
+            <div class="kpi-label">파일럿 수치 목표</div>
+            <div class="kpi-num kpi-num-a">이메일 140건<br>SNS 도달 20,000<br>전환 ¥135,000</div>
+          </div>
+        </div>
+
+        <div class="phase-arrow">›</div>
+
+        <!-- Phase 3 -->
+        <div class="phase">
+          <div class="phase-num">Phase 3</div>
+          <h3>확장 영업</h3>
+          <div class="phase-period">2~3개월차</div>
+          <ul class="phase-items">
+            <li>성공사례 문서화 (수치 포함)</li>
+            <li>횡적: 같은 브랜드 오사카·나고야</li>
+            <li>종적: 인접 브랜드 소개 영업</li>
+            <li>@cosme TOKYO 자체 제안</li>
+          </ul>
+          <div class="phase-kpi kpi-a">
+            <div class="kpi-label">3개월 목표</div>
+            <div class="kpi-num kpi-num-a">정기 계약 3건<br>파일럿 누계 5회</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cascade Box -->
+      <div class="cascade">
+        <div class="cascade-title">파일럿 1회 수치 cascade — 방문자 500명 기준</div>
+        <div class="cascade-row">
+          <span class="cascade-num" style="color:var(--dark)">500명</span>
+          <span class="cascade-arrow">→</span>
+          <span class="cascade-desc">팝업 방문자 (롬앤 @cosme TOKYO 기준)</span>
+        </div>
+        <div class="cascade-row">
+          <span class="cascade-num kpi-num-a">200명</span>
+          <span class="cascade-arrow">→</span>
+          <span class="cascade-desc">QR 스캔 참여</span>
+          <span class="cascade-rate">참여율 40%</span>
+        </div>
+        <div class="cascade-row">
+          <span class="cascade-num kpi-num-a">140건</span>
+          <span class="cascade-arrow">→</span>
+          <span class="cascade-desc">이메일 수집 완료</span>
+          <span class="cascade-rate">완료율 70%</span>
+        </div>
+        <div class="cascade-row">
+          <span class="cascade-num kpi-num-a">40건</span>
+          <span class="cascade-arrow">→</span>
+          <span class="cascade-desc">SNS 공유 → 도달 20,000</span>
+          <span class="cascade-rate">공유율 20%</span>
+        </div>
+        <div class="cascade-row">
+          <span class="cascade-num kpi-num-a">+200명</span>
+          <span class="cascade-arrow">→</span>
+          <span class="cascade-desc">인스타 브랜드 팔로워 증가</span>
+          <span class="cascade-rate">노출 전환 1%</span>
+        </div>
+        <div class="cascade-row">
+          <span class="cascade-num kpi-num-a">¥135,000</span>
+          <span class="cascade-arrow">→</span>
+          <span class="cascade-desc">7일 이내 온라인 전환 매출 (27건 × ¥5,000)</span>
+          <span class="cascade-rate">전환율 15%</span>
+        </div>
+      </div>
+
+      <!-- Target Brands -->
+      <div style="margin-top:20px">
+        <div style="font-size:11px; font-weight:700; color:var(--gray); letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px;">A등급 타겟 브랜드 — 즉시 접근</div>
+        <div class="brands-grid">
+          <div class="brand-card priority">
+            <div class="brand-name">롬앤 (rom&nd)</div>
+            <div class="brand-date">2025.08 @cosme TOKYO+OSAKA</div>
+            <span class="brand-tag hot">최우선</span>
+          </div>
+          <div class="brand-card priority">
+            <div class="brand-name">CipiCipi</div>
+            <div class="brand-date">2025.10 NCT WISH 콜라보</div>
+            <span class="brand-tag hot">최우선</span>
+          </div>
+          <div class="brand-card priority">
+            <div class="brand-name">TIRTIR</div>
+            <div class="brand-date">2025.11 시부야 팝업</div>
+            <span class="brand-tag hot">최우선</span>
+          </div>
+          <div class="brand-card">
+            <div class="brand-name">마녀공장 (manyo)</div>
+            <div class="brand-date">2025.04 @cosme TOKYO</div>
+            <span class="brand-tag">성분 퀴즈 적합</span>
+          </div>
+          <div class="brand-card">
+            <div class="brand-name">lilybyred</div>
+            <div class="brand-date">2025.09 신오쿠보 旗艦店</div>
+            <span class="brand-tag">장기 계약 가능</span>
+          </div>
+          <div class="brand-card">
+            <div class="brand-name">COSRX</div>
+            <div class="brand-date">2025.06 오모테산도</div>
+            <span class="brand-tag">데이터 수집 니즈</span>
+          </div>
+          <div class="brand-card">
+            <div class="brand-name">어뮤즈 (AMUSE)</div>
+            <div class="brand-date">2024.10 하라주쿠</div>
+            <span class="brand-tag">팬덤 챌린지</span>
+          </div>
+          <div class="brand-card">
+            <div class="brand-name">LANEIGE</div>
+            <div class="brand-date">정기 팝업</div>
+            <span class="brand-tag">BTS 팬덤</span>
+          </div>
+          <div class="brand-card">
+            <div class="brand-name">원정요</div>
+            <div class="brand-date">2025.09 일본바시</div>
+            <span class="brand-tag">스탬프 랠리</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       TRACK B
+  ══════════════════════════════ -->
+  <div class="section-title" style="margin-top: 44px;">Track B — 팝업 캠페인 플래너 겸 실전 운영</div>
+  <div class="track-card">
+    <div class="track-card-header">
+      <span class="track-badge badge-b">TRACK B</span>
+      <div>
+        <h2>뷰티 MD 시각의 캠페인 유형 라이브러리 × 실전 운영</h2>
+        <p>브랜드 로고만 바꾸면 48시간 내 런칭 가능한 5종 템플릿 — 수치가 기획의 시작</p>
+      </div>
+    </div>
+    <div class="track-body">
+
+      <div class="campaign-grid">
+
+        <!-- 유형 1 -->
+        <div class="campaign-card">
+          <div class="campaign-icon">🎡</div>
+          <h3>컬러 룰렛 チャレンジ</h3>
+          <div class="brands">롬앤 · TIRTIR · 리리바이레드</div>
+          <div class="campaign-flow">
+            QR 스캔<br>
+            ↓ 룰렛 스핀 (15초)<br>
+            ↓ 신색 당첨<br>
+            ↓ 샘플쿠폰 + 이메일<br>
+            ↓ SNS 공유 → 추가쿠폰
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-item"><span class="label">이메일 수집</span><span class="val green">140건</span></div>
+            <div class="kpi-item"><span class="label">SNS 도달</span><span class="val green">20,000</span></div>
+            <div class="kpi-item"><span class="label">팔로워 증가</span><span class="val green">+200명</span></div>
+            <div class="kpi-item"><span class="label">전환 매출</span><span class="val green">¥195,000</span></div>
+          </div>
+        </div>
+
+        <!-- 유형 2 -->
+        <div class="campaign-card">
+          <div class="campaign-icon">🔬</div>
+          <h3>피부 타입 진단 퀴즈</h3>
+          <div class="brands">COSRX · 아누아 · 마녀공장</div>
+          <div class="campaign-flow">
+            QR 스캔<br>
+            ↓ 5문 퀴즈 (2분)<br>
+            ↓ 피부 타입 진단<br>
+            ↓ 맞춤 제품 추천<br>
+            ↓ 현장 10% 할인
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-item"><span class="label">이메일 수집</span><span class="val green">95건</span></div>
+            <div class="kpi-item"><span class="label">현장 추가매출</span><span class="val green">¥199,500</span></div>
+            <div class="kpi-item"><span class="label">@cosme 리뷰</span><span class="val green">24건</span></div>
+            <div class="kpi-item"><span class="label">온라인 재구매</span><span class="val green">¥76,000</span></div>
+          </div>
+        </div>
+
+        <!-- 유형 3 -->
+        <div class="campaign-card">
+          <div class="campaign-icon">⭐</div>
+          <h3>팬 인증 챌린지</h3>
+          <div class="brands">CipiCipi · 어뮤즈 · LANEIGE</div>
+          <div class="campaign-flow">
+            QR 스캔<br>
+            ↓ 팬 퀴즈 3문 (60초)<br>
+            ↓ 디지털 포토카드<br>
+            ↓ 인스타 스토리 공유<br>
+            ↓ 실물 포토카드 수령
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-item"><span class="label">이메일 수집</span><span class="val green">272건</span></div>
+            <div class="kpi-item"><span class="label">SNS 총 도달</span><span class="val green">110,000</span></div>
+            <div class="kpi-item"><span class="label">팔로워 증가</span><span class="val green">+870명</span></div>
+            <div class="kpi-item"><span class="label">전환 매출</span><span class="val green">¥244,800</span></div>
+          </div>
+        </div>
+
+        <!-- 유형 4 -->
+        <div class="campaign-card">
+          <div class="campaign-icon">🗺️</div>
+          <h3>멀티 코너 스탬프 랠리</h3>
+          <div class="brands">lilybyred · 이니스프리 · 에뛰드</div>
+          <div class="campaign-flow">
+            입장 QR (스탬프 카드)<br>
+            ↓ 5코너 순회 (45분)<br>
+            ↓ 스탬프 수집<br>
+            ↓ 단계별 리워드<br>
+            ↓ 재방문 유인 설계
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-item"><span class="label">체류시간</span><span class="val green">45분 (3배↑)</span></div>
+            <div class="kpi-item"><span class="label">재방문율 (2주)</span><span class="val green">25%</span></div>
+            <div class="kpi-item"><span class="label">크로스 구매 매출</span><span class="val green">¥135,000</span></div>
+            <div class="kpi-item"><span class="label">월 팔로워 증가</span><span class="val green">+5,640명</span></div>
+          </div>
+        </div>
+
+        <!-- 유형 5 -->
+        <div class="campaign-card">
+          <div class="campaign-icon">📝</div>
+          <h3>리얼 리뷰 리워드</h3>
+          <div class="brands">@cosme 랭킹 타겟 전 브랜드</div>
+          <div class="campaign-flow">
+            영수증 QR<br>
+            ↓ 구매 인증<br>
+            ↓ @cosme 리뷰 작성<br>
+            ↓ SNS 공유<br>
+            ↓ 포인트 + 재구매 쿠폰
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-item"><span class="label">@cosme 리뷰/월</span><span class="val green">480건</span></div>
+            <div class="kpi-item"><span class="label">2개월 누적</span><span class="val green">960건</span></div>
+            <div class="kpi-item"><span class="label">카테고리 순위</span><span class="val green">↑40~60단계</span></div>
+            <div class="kpi-item"><span class="label">재구매 쿠폰 매출</span><span class="val green">¥53,000/일</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quality Standards -->
+      <div style="margin-top:20px; display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:8px;">
+        <div style="background:var(--b-light); border-radius:8px; padding:12px; text-align:center;">
+          <div style="font-size:20px; font-weight:800; color:#007A65;">40%+</div>
+          <div style="font-size:11px; color:var(--gray); margin-top:2px;">QR 참여율 목표</div>
+        </div>
+        <div style="background:var(--b-light); border-radius:8px; padding:12px; text-align:center;">
+          <div style="font-size:20px; font-weight:800; color:#007A65;">70%+</div>
+          <div style="font-size:11px; color:var(--gray); margin-top:2px;">이메일 수집 완료율</div>
+        </div>
+        <div style="background:var(--b-light); border-radius:8px; padding:12px; text-align:center;">
+          <div style="font-size:20px; font-weight:800; color:#007A65;">20%+</div>
+          <div style="font-size:11px; color:var(--gray); margin-top:2px;">SNS 공유율</div>
+        </div>
+        <div style="background:var(--b-light); border-radius:8px; padding:12px; text-align:center;">
+          <div style="font-size:20px; font-weight:800; color:#007A65;">48h</div>
+          <div style="font-size:11px; color:var(--gray); margin-top:2px;">캠페인 준비 시간</div>
+        </div>
+        <div style="background:var(--b-light); border-radius:8px; padding:12px; text-align:center;">
+          <div style="font-size:20px; font-weight:800; color:#007A65;">D+3</div>
+          <div style="font-size:11px; color:var(--gray); margin-top:2px;">리포트 제출 SLA</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       TRACK C
+  ══════════════════════════════ -->
+  <div class="section-title" style="margin-top: 44px;">Track C — 이커머스 O2O 전략 컨설팅</div>
+  <div class="track-card">
+    <div class="track-card-header">
+      <span class="track-badge badge-c">TRACK C</span>
+      <div>
+        <h2>팝업 데이터 → 온라인 채널 전환 + 광고 최적화</h2>
+        <p>A/B 성과 데이터 확보 후 번들 패키지로 제안 — 라쿠텐·아마존·@cosme·LINE·메타 광고</p>
+      </div>
+    </div>
+    <div class="track-body">
+
+      <!-- Funnel -->
+      <div class="funnel-wrap">
+        <!-- Left: 팝업 데이터 -->
+        <div>
+          <div style="font-size:11px; font-weight:700; color:var(--gray); letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px;">팝업 데이터 (INPUT)</div>
+          <div class="popup-box">
+            <div class="pb-title">DPromotion 팝업 캠페인 1회</div>
+            <div class="pb-main">500명</div>
+            <div class="pb-sub">방문자 기준</div>
+            <div class="popup-stats">
+              <div class="popup-stat"><div class="s-num">140건</div><div class="s-label">이메일 DB</div></div>
+              <div class="popup-stat"><div class="s-num">40건</div><div class="s-label">SNS 공유</div></div>
+              <div class="popup-stat"><div class="s-num">20,000</div><div class="s-label">SNS 도달</div></div>
+              <div class="popup-stat"><div class="s-num">+200명</div><div class="s-label">팔로워</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center arrow -->
+        <div class="funnel-center">
+          <div class="funnel-label">이커머스<br>전환</div>
+          <div class="funnel-arrow">→</div>
+        </div>
+
+        <!-- Right: 채널별 KPI -->
+        <div class="funnel-col">
+          <div style="font-size:11px; font-weight:700; color:var(--gray); letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px;">채널별 수치 목표 (OUTPUT)</div>
+
+          <div class="channel-card">
+            <div class="ch-name"><div class="ch-dot" style="background:#BF001A;"></div>라쿠텐 이치바</div>
+            <div style="font-size:11px; color:var(--gray);">슈퍼세일 역산 기획 · RPP 광고</div>
+            <div class="ch-target">
+              <div class="t-label">3개월 후 목표</div>
+              <div class="t-val">매출 +50% · ROAS 3.5x</div>
+            </div>
+          </div>
+
+          <div class="channel-card">
+            <div class="ch-name"><div class="ch-dot" style="background:#FF9900;"></div>아마존 JP</div>
+            <div style="font-size:11px; color:var(--gray);">A+ 콘텐츠 · Vine 리뷰어</div>
+            <div class="ch-target">
+              <div class="t-label">3개월 후 목표</div>
+              <div class="t-val">리뷰 30건 · 평점 4.0+ · 월 매출 ¥500,000</div>
+            </div>
+          </div>
+
+          <div class="channel-card">
+            <div class="ch-name"><div class="ch-dot" style="background:#E91E8C;"></div>@cosme</div>
+            <div style="font-size:11px; color:var(--gray);">ベストコスメ 역산 전략</div>
+            <div class="ch-target">
+              <div class="t-label">9~12월 집중 목표</div>
+              <div class="t-val">리뷰 300건 누적 → ベストコスメ 수상</div>
+            </div>
+          </div>
+
+          <div class="channel-card">
+            <div class="ch-name"><div class="ch-dot" style="background:#00B900;"></div>LINE 공식계정</div>
+            <div style="font-size:11px; color:var(--gray);">팝업 → 친구 추가 → 메시지 시퀀스</div>
+            <div class="ch-target">
+              <div class="t-label">목표</div>
+              <div class="t-val">팝업 1회 +200명 · 개봉율 55% · ROAS 4.0x</div>
+            </div>
+          </div>
+
+          <div class="channel-card">
+            <div class="ch-name"><div class="ch-dot" style="background:#1877F2;"></div>메타 광고 (인스타)</div>
+            <div style="font-size:11px; color:var(--gray);">커스텀 오디언스 · 유사 오디언스 · 리타겟팅</div>
+            <div class="ch-target">
+              <div class="t-label">3개월 최적화 후</div>
+              <div class="t-val">ROAS 4.0x · 월 기대 매출 ¥800,000</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Package Summary -->
+      <div style="margin-top:20px; display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+        <div style="border:2px solid #E5E7EB; border-radius:10px; padding:16px; text-align:center;">
+          <div style="font-size:11px; font-weight:700; color:var(--gray); margin-bottom:8px;">PACKAGE A</div>
+          <div style="font-size:15px; font-weight:700; margin-bottom:6px;">팝업 스타터</div>
+          <div style="font-size:12px; color:var(--gray);">캠페인 1회 + D+3 리포트</div>
+          <div style="margin-top:10px; font-size:12px; color:#C0392B; font-weight:700;">QR 참여율 30%+ 보장<br>이메일 100건+ 보장</div>
+        </div>
+        <div style="border:2px solid var(--c); border-radius:10px; padding:16px; text-align:center; background:var(--c-light);">
+          <div style="font-size:11px; font-weight:700; color:#C0392B; margin-bottom:8px;">PACKAGE B ★</div>
+          <div style="font-size:15px; font-weight:700; margin-bottom:6px;">O2O 그로스</div>
+          <div style="font-size:12px; color:var(--gray);">월 캠페인 2회 + 광고 + LINE</div>
+          <div style="margin-top:10px; font-size:12px; color:#C0392B; font-weight:700;">3개월 후 온라인 매출 +50%<br>ROAS 3.0x+ 약속</div>
+        </div>
+        <div style="border:2px solid #E5E7EB; border-radius:10px; padding:16px; text-align:center;">
+          <div style="font-size:11px; font-weight:700; color:var(--gray); margin-bottom:8px;">PACKAGE C</div>
+          <div style="font-size:15px; font-weight:700; margin-bottom:6px;">풀서비스 진출</div>
+          <div style="font-size:12px; color:var(--gray);">B 전체 + 바이어 동행 + 구독 모델</div>
+          <div style="margin-top:10px; font-size:12px; color:#C0392B; font-weight:700;">6개월 후 온라인 매출 +100%<br>@cosme TOP 20 달성</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       6개월 KPI Summary
+  ══════════════════════════════ -->
+  <div class="section-title" style="margin-top: 44px;">6개월 누적 수치 목표</div>
+  <div class="kpi-summary">
+    <div class="kpi-box">
+      <div class="kb-val kb-a">6건</div>
+      <div class="kb-label">정기 계약 브랜드</div>
+      <div class="kb-period">6개월 누적</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kb-val kb-a">10회</div>
+      <div class="kb-label">월 캠페인 운영</div>
+      <div class="kb-period">6개월 시점</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kb-val kb-b">1,400건</div>
+      <div class="kb-label">월 이메일 수집</div>
+      <div class="kb-period">6개월 시점</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kb-val kb-b">+3,000명</div>
+      <div class="kb-label">브랜드 팔로워 증가</div>
+      <div class="kb-period">브랜드당 6개월</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kb-val kb-c">+80%</div>
+      <div class="kb-label">라쿠텐 매출 증가율</div>
+      <div class="kb-period">도입 전 대비</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kb-val kb-c">60건+</div>
+      <div class="kb-label">@cosme 월 신규 리뷰</div>
+      <div class="kb-period">6개월 시점</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kb-val kb-c">4.0x</div>
+      <div class="kb-label">광고 ROAS</div>
+      <div class="kb-period">3개월 최적화 후</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kb-val kb-a">+100%</div>
+      <div class="kb-label">온라인 총 매출 증가</div>
+      <div class="kb-period">패키지 C 6개월</div>
+    </div>
+  </div>
+
+  <!-- Closing statement -->
+  <div style="margin-top:32px; background:var(--dark); border-radius:12px; padding:28px 32px; color:#fff;">
+    <div style="font-size:11px; color:#6B7280; letter-spacing:.1em; text-transform:uppercase; margin-bottom:12px;">핵심 포지셔닝</div>
+    <p style="font-size:16px; line-height:1.8; color:#F3F4F6;">
+      뷰티 MD 출신이라 어떤 제품이 일본 소비자에게 먹히는지 압니다.<br>
+      DPromotion 플랫폼으로 그 감각을 <strong style="color:#9F8FFF;">수치로 증명</strong>합니다.<br>
+      팝업 1회에 이메일 <strong style="color:#6CD9CA;">140건</strong>, SNS 도달 <strong style="color:#6CD9CA;">20,000</strong>, 온라인 전환 <strong style="color:#6CD9CA;">¥150,000</strong>.<br>
+      일본어로 직접 보고하고, 현장도 제가 직접 뜁니다.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
