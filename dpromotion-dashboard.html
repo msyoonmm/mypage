@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DPromotion 3개월 프로젝트 달력 대시보드</title>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+
+<style>
+:root{--bg:#F4F5F7;--card:#fff;--dark:#1A1A2E;--muted:#6B7280;--border:#E5E7EB;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:'Apple SD Gothic Neo','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#111827;line-height:1.55}
+.wrap{max-width:1500px;margin:0 auto;padding:34px}
+.hero{background:linear-gradient(135deg,#1A1A2E,#3B2E9E);color:#fff;border-radius:28px;padding:38px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#C4B5FD;font-weight:800;margin-bottom:10px}
+.hero h1{margin:0;font-size:34px;letter-spacing:-.04em;line-height:1.22}
+.hero p{margin:10px 0 0;color:#E5E7EB;font-size:15px}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700}
+.section-title{margin:34px 0 12px;font-size:25px;letter-spacing:-.04em}
+.section-sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+.grid{display:grid;gap:18px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-6{grid-template-columns:repeat(6,1fr)}
+.card{background:#fff;border:1px solid var(--border);border-radius:22px;padding:22px;box-shadow:0 10px 28px rgba(0,0,0,.05)}
+.roadmap-card{border-top:8px solid var(--accent)}
+.roadmap-card h3{margin:0;font-size:18px}
+.roadmap-card p{font-size:13px;color:var(--muted);margin:8px 0 0}
+.month-block{margin-top:34px;background:#fff;border:1px solid var(--border);border-radius:26px;padding:24px}
+.month-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid var(--border);padding-bottom:18px;margin-bottom:18px}
+.month-title{display:flex;align-items:center;gap:12px}
+.month-badge{padding:8px 13px;border-radius:999px;color:#fff;font-size:13px;font-weight:900;background:var(--accent)}
+.month-title h2{margin:0;font-size:25px;letter-spacing:-.04em}
+.month-goal{font-size:13px;color:var(--muted);max-width:760px}
+.calendar{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.day{background:#fff;border:1px solid var(--border);border-radius:18px;padding:14px;min-height:210px}
+.day-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.day-name{font-size:14px;font-weight:900}
+.week-label{font-size:11px;color:var(--muted);font-weight:700}
+.task{font-size:12px;padding:7px 8px;border-radius:10px;margin-bottom:7px;font-weight:700;background:var(--soft);color:var(--accent)}
+.task.sub{background:#F9FAFB;color:#374151}
+.task.note{background:#FFFBEB;color:#92400E}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:18px}
+.kpi{background:#F9FAFB;border:1px solid var(--border);border-radius:16px;padding:15px;text-align:center}
+.kpi .num{font-size:24px;font-weight:900;color:var(--accent)}
+.kpi .label{font-size:12px;color:var(--muted);margin-top:3px}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.legend span{font-size:11px;padding:5px 9px;border-radius:999px;background:#F3F4F6;color:#374151;font-weight:700}
+.summary{background:#111827;color:#fff;border-radius:24px;padding:28px;margin-top:34px}
+.summary h2{margin:0 0 12px}
+.summary p{color:#E5E7EB;font-size:14px;line-height:1.8}
+@media(max-width:1100px){.grid-3,.grid-6,.calendar,.kpis{grid-template-columns:1fr}.wrap{padding:18px}.month-head{flex-direction:column}.day{min-height:auto}}
+.ppt-btn{position:fixed;right:22px;bottom:22px;z-index:9999;border:0;border-radius:999px;background:#111827;color:#fff;padding:13px 24px;font-size:14px;font-weight:800;box-shadow:0 14px 34px rgba(17,24,39,.24);cursor:pointer;font-family:inherit}
+.ppt-btn:hover{background:#1f2937}
+.ppt-btn:disabled{cursor:wait;opacity:.6}
+</style>
+
+</head>
+<body>
+<button id="pptBtn" class="ppt-btn" onclick="downloadPPT()">PPT 다운로드</button>
+<div class="wrap">
+<section class="hero">
+  <div class="eyebrow">DPromotion × Japan OMO Consulting</div>
+  <h1>3개월 프로젝트 달력 대시보드</h1>
+  <p>K-뷰티 일본 영업 · 팝업 캠페인 운영 · 이커머스 O2O 전환 전략을 1개월차, 2개월차, 3개월차 실행 달력으로 정리</p>
+  <div class="tag-row">
+    <span class="tag">Month 1: 준비 + 첫 접촉</span>
+    <span class="tag">Month 2: 파일럿 제안 + 운영</span>
+    <span class="tag">Month 3: 사례화 + 확장 영업</span>
+    <span class="tag">DPromotion</span>
+    <span class="tag">K-Beauty Japan</span>
+  </div>
+</section>
+
+<h2 class="section-title">3개월 전체 구조</h2>
+<div class="section-sub">월별 역할을 분리해 업무 범위와 기대 산출물이 명확하게 보이도록 구성했습니다.</div>
+<div class="grid grid-3">
+
+    <div class="card roadmap-card" style="--accent:#6C63FF">
+      <h3>1개월차 · 준비 + 첫 접촉</h3>
+      <p>DPromotion 에디터 실습, K-뷰티 타깃 브랜드 선별, 일본어 제안서 정리, DM/메일 발송, 첫 미팅 확보</p>
+    </div>
+    
+    <div class="card roadmap-card" style="--accent:#00B89C">
+      <h3>2개월차 · 파일럿 제안 + 캠페인 운영</h3>
+      <p>브랜드 1~2곳과 파일럿 조건 협의, 팝업 캠페인 시나리오 확정, QR/룰렛/퀴즈 운영안 제작, 성과 측정 구조 세팅</p>
+    </div>
+    
+    <div class="card roadmap-card" style="--accent:#FF6B6B">
+      <h3>3개월차 · 사례화 + 확장 영업</h3>
+      <p>파일럿 성과를 사례화하고, 동일 브랜드 확장/인접 브랜드 영업/정기 계약 전환까지 연결</p>
+    </div>
+    </div>
+<section class="month-block" style="--accent:#6C63FF;--soft:#EEF0FF">
+  <div class="month-head">
+    <div>
+      <div class="month-title">
+        <span class="month-badge">1개월차</span>
+        <h2>준비 + 첫 접촉</h2>
+      </div>
+      <div class="legend">
+        <span>주요업무</span>
+        <span>보조업무</span>
+        <span>리포트/정리</span>
+      </div>
+    </div>
+    <div class="month-goal"><strong>월간 목표:</strong> DPromotion 에디터 실습, K-뷰티 타깃 브랜드 선별, 일본어 제안서 정리, DM/메일 발송, 첫 미팅 확보</div>
+  </div>
+  <div class="calendar">
+    
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 1 · 내부 준비</span>
+        </div>
+        <div class="task">DPromotion 에디터 실습</div>
+        <div class="task sub">룰렛/퀴즈/스탬프 기능 확인</div>
+        <div class="task note">롬앤·TIRTIR·CipiCipi 사례 조사</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 1 · 내부 준비</span>
+        </div>
+        <div class="task">K-뷰티 타깃 브랜드 리스트업</div>
+        <div class="task sub">A/B/C 등급 분류</div>
+        <div class="task note">@cosme·팝업 사례 조사</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 1 · 내부 준비</span>
+        </div>
+        <div class="task">일본어 제안서 템플릿 정리</div>
+        <div class="task sub">DM/메일 초안 작성</div>
+        <div class="task note">성과 수치 예시 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 1 · 내부 준비</span>
+        </div>
+        <div class="task">담당자 리스트업</div>
+        <div class="task sub">Instagram/LinkedIn/브랜드 사이트 조사</div>
+        <div class="task note">접촉 우선순위 설정</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 1 · 내부 준비</span>
+        </div>
+        <div class="task">DM/메일 1차 발송</div>
+        <div class="task sub">CRM 정리</div>
+        <div class="task note">주간 리포트 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 2 · 첫 접촉 / 미팅 세팅</span>
+        </div>
+        <div class="task">Follow-up 메일 발송</div>
+        <div class="task sub">회신 브랜드 정리</div>
+        <div class="task note">미팅 아젠다 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 2 · 첫 접촉 / 미팅 세팅</span>
+        </div>
+        <div class="task">일본 온라인 미팅 1차</div>
+        <div class="task sub">미팅록 작성</div>
+        <div class="task note">추가 요청자료 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 2 · 첫 접촉 / 미팅 세팅</span>
+        </div>
+        <div class="task">파일럿 시나리오 초안 작성</div>
+        <div class="task sub">QR 이벤트 흐름 설계</div>
+        <div class="task note">KPI 구조 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 2 · 첫 접촉 / 미팅 세팅</span>
+        </div>
+        <div class="task">브랜드별 맞춤안 작성</div>
+        <div class="task sub">룰렛/퀴즈 UI 수정</div>
+        <div class="task note">SNS 공유 흐름 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 2 · 첫 접촉 / 미팅 세팅</span>
+        </div>
+        <div class="task">Follow-up 미팅</div>
+        <div class="task sub">내부 공유</div>
+        <div class="task note">주간 성과 리포트</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 3 · 파일럿 제안 준비</span>
+        </div>
+        <div class="task">파일럿 제안서 작성</div>
+        <div class="task sub">성과 예상치 정리</div>
+        <div class="task note">이메일 수집 KPI 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 3 · 파일럿 제안 준비</span>
+        </div>
+        <div class="task">브랜드 맞춤 제안안 작성</div>
+        <div class="task sub">팝업 동선 설계</div>
+        <div class="task note">QR 설치 위치 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 3 · 파일럿 제안 준비</span>
+        </div>
+        <div class="task">성과 리포트 템플릿 제작</div>
+        <div class="task sub">SNS 공유 흐름 설계</div>
+        <div class="task note">A/B 테스트 아이디어 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 3 · 파일럿 제안 준비</span>
+        </div>
+        <div class="task">LINE/Instagram 후속 전략 작성</div>
+        <div class="task sub">재방문 시나리오 설계</div>
+        <div class="task note">쿠폰/리워드 구조 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 3 · 파일럿 제안 준비</span>
+        </div>
+        <div class="task">파일럿 최종안 내부 리뷰</div>
+        <div class="task sub">수정사항 반영</div>
+        <div class="task note">다음 주 미팅 준비</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 4 · 파일럿 제안 / 다음달 준비</span>
+        </div>
+        <div class="task">추가 브랜드 접촉</div>
+        <div class="task sub">회신 브랜드 관리</div>
+        <div class="task note">파일럿 일정 조율</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 4 · 파일럿 제안 / 다음달 준비</span>
+        </div>
+        <div class="task">파일럿 제안 미팅</div>
+        <div class="task sub">성과 예상치 설명</div>
+        <div class="task note">운영 조건 협의</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 4 · 파일럿 제안 / 다음달 준비</span>
+        </div>
+        <div class="task">운영 체크리스트 제작</div>
+        <div class="task sub">현장 운영안 정리</div>
+        <div class="task note">스태프 역할 분배안 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 4 · 파일럿 제안 / 다음달 준비</span>
+        </div>
+        <div class="task">최종 Follow-up</div>
+        <div class="task sub">계약 가능성 정리</div>
+        <div class="task note">2개월차 액션플랜 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 4 · 파일럿 제안 / 다음달 준비</span>
+        </div>
+        <div class="task">월간 리포트</div>
+        <div class="task sub">미팅 결과 정리</div>
+        <div class="task note">2개월차 실행 준비</div>
+      </div>
+            
+  </div>
+  <div class="kpis">
+    
+    <div class="kpi">
+      <div class="num">9개</div>
+      <div class="label">우선 타깃 브랜드</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">20건+</div>
+      <div class="label">DM/메일 발송</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">4건</div>
+      <div class="label">브랜드 응답</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">2건</div>
+      <div class="label">온라인 미팅</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">1건</div>
+      <div class="label">파일럿 제안</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">1종</div>
+      <div class="label">일본어 제안서</div>
+    </div>
+        
+  </div>
+</section>
+    
+<section class="month-block" style="--accent:#00B89C;--soft:#E6F7F5">
+  <div class="month-head">
+    <div>
+      <div class="month-title">
+        <span class="month-badge">2개월차</span>
+        <h2>파일럿 제안 + 캠페인 운영</h2>
+      </div>
+      <div class="legend">
+        <span>주요업무</span>
+        <span>보조업무</span>
+        <span>리포트/정리</span>
+      </div>
+    </div>
+    <div class="month-goal"><strong>월간 목표:</strong> 브랜드 1~2곳과 파일럿 조건 협의, 팝업 캠페인 시나리오 확정, QR/룰렛/퀴즈 운영안 제작, 성과 측정 구조 세팅</div>
+  </div>
+  <div class="calendar">
+    
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 1 · 파일럿 조건 확정</span>
+        </div>
+        <div class="task">1개월차 미팅 브랜드 Follow-up</div>
+        <div class="task sub">파일럿 후보 브랜드 우선순위 확정</div>
+        <div class="task note">조건 협의 메일 발송</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 1 · 파일럿 조건 확정</span>
+        </div>
+        <div class="task">파일럿 범위 협의</div>
+        <div class="task sub">캠페인 목적/KPI 정의</div>
+        <div class="task note">운영 일정 가안 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 1 · 파일럿 조건 확정</span>
+        </div>
+        <div class="task">팝업 방문자 동선 설계</div>
+        <div class="task sub">QR 스캔 위치/참여 흐름 정리</div>
+        <div class="task note">현장 리워드 구조 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 1 · 파일럿 조건 확정</span>
+        </div>
+        <div class="task">브랜드별 캠페인 카피 작성</div>
+        <div class="task sub">일본어 참여 문구 검수</div>
+        <div class="task note">개인정보 수집 문구 확인</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 1 · 파일럿 조건 확정</span>
+        </div>
+        <div class="task">파일럿 운영안 1차 공유</div>
+        <div class="task sub">내부 피드백 취합</div>
+        <div class="task note">주간 리포트 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 2 · 캠페인 제작 / 세팅</span>
+        </div>
+        <div class="task">룰렛/퀴즈/스탬프 캠페인 세팅</div>
+        <div class="task sub">디자인/카피 반영</div>
+        <div class="task note">참여 완료 화면 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 2 · 캠페인 제작 / 세팅</span>
+        </div>
+        <div class="task">쿠폰/샘플 리워드 구조 세팅</div>
+        <div class="task sub">이메일 수집 항목 점검</div>
+        <div class="task note">SNS 공유 문구 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 2 · 캠페인 제작 / 세팅</span>
+        </div>
+        <div class="task">테스트 참여 진행</div>
+        <div class="task sub">오류/UX 이슈 정리</div>
+        <div class="task note">수정 요청사항 내부 공유</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 2 · 캠페인 제작 / 세팅</span>
+        </div>
+        <div class="task">브랜드 확인용 데모 공유</div>
+        <div class="task sub">운영 매뉴얼 초안 작성</div>
+        <div class="task note">현장 안내문구 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 2 · 캠페인 제작 / 세팅</span>
+        </div>
+        <div class="task">수정사항 반영</div>
+        <div class="task sub">파일럿 운영 체크리스트 작성</div>
+        <div class="task note">주간 진행 리포트</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 3 · 파일럿 실행 / 모니터링</span>
+        </div>
+        <div class="task">캠페인 오픈 전 최종 점검</div>
+        <div class="task sub">QR/링크 테스트</div>
+        <div class="task note">브랜드 담당자 운영 안내</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 3 · 파일럿 실행 / 모니터링</span>
+        </div>
+        <div class="task">파일럿 캠페인 실행</div>
+        <div class="task sub">실시간 참여 데이터 확인</div>
+        <div class="task note">긴급 문의 대응</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 3 · 파일럿 실행 / 모니터링</span>
+        </div>
+        <div class="task">참여율/이탈률 중간 점검</div>
+        <div class="task sub">카피/리워드 개선안 정리</div>
+        <div class="task note">필요 시 즉시 수정</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 3 · 파일럿 실행 / 모니터링</span>
+        </div>
+        <div class="task">SNS 공유 현황 확인</div>
+        <div class="task sub">고객 반응/문의 정리</div>
+        <div class="task note">D+1 중간 리포트 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 3 · 파일럿 실행 / 모니터링</span>
+        </div>
+        <div class="task">캠페인 종료/1차 데이터 취합</div>
+        <div class="task sub">성과 요약</div>
+        <div class="task note">브랜드 Follow-up</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 4 · 성과 리포트 / 본계약 제안</span>
+        </div>
+        <div class="task">D+3 성과 리포트 작성</div>
+        <div class="task sub">참여율/DB/SNS 도달 정리</div>
+        <div class="task note">개선 포인트 도출</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 4 · 성과 리포트 / 본계약 제안</span>
+        </div>
+        <div class="task">브랜드 리뷰 미팅</div>
+        <div class="task sub">성과 설명</div>
+        <div class="task note">본계약/정기 운영 제안</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 4 · 성과 리포트 / 본계약 제안</span>
+        </div>
+        <div class="task">정기 운영 패키지 제안서 작성</div>
+        <div class="task sub">월 2회/월 4회 운영안 비교</div>
+        <div class="task note">비용 구조 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 4 · 성과 리포트 / 본계약 제안</span>
+        </div>
+        <div class="task">추가 브랜드 확장 리스트 작성</div>
+        <div class="task sub">파일럿 사례 기반 제안 문구 작성</div>
+        <div class="task note">영업 자료 업데이트</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 4 · 성과 리포트 / 본계약 제안</span>
+        </div>
+        <div class="task">2개월차 월간 리포트</div>
+        <div class="task sub">본계약 가능성 정리</div>
+        <div class="task note">3개월차 확장 계획 수립</div>
+      </div>
+            
+  </div>
+  <div class="kpis">
+    
+    <div class="kpi">
+      <div class="num">1~2건</div>
+      <div class="label">파일럿 후보</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">1건</div>
+      <div class="label">캠페인 실행</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">100건+</div>
+      <div class="label">이메일 DB 목표</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">30%+</div>
+      <div class="label">QR 참여율</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">D+3</div>
+      <div class="label">성과 리포트</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">1건</div>
+      <div class="label">본계약 제안</div>
+    </div>
+        
+  </div>
+</section>
+    
+<section class="month-block" style="--accent:#FF6B6B;--soft:#FFF0F0">
+  <div class="month-head">
+    <div>
+      <div class="month-title">
+        <span class="month-badge">3개월차</span>
+        <h2>사례화 + 확장 영업</h2>
+      </div>
+      <div class="legend">
+        <span>주요업무</span>
+        <span>보조업무</span>
+        <span>리포트/정리</span>
+      </div>
+    </div>
+    <div class="month-goal"><strong>월간 목표:</strong> 파일럿 성과를 사례화하고, 동일 브랜드 확장/인접 브랜드 영업/정기 계약 전환까지 연결</div>
+  </div>
+  <div class="calendar">
+    
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 1 · 성과 사례화</span>
+        </div>
+        <div class="task">파일럿 성과 데이터 재정리</div>
+        <div class="task sub">Before/After 구조 작성</div>
+        <div class="task note">핵심 수치 선별</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 1 · 성과 사례화</span>
+        </div>
+        <div class="task">일본어 성공사례 문서 작성</div>
+        <div class="task sub">브랜드 피드백 정리</div>
+        <div class="task note">활용 가능 코멘트 확인</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 1 · 성과 사례화</span>
+        </div>
+        <div class="task">세일즈용 1페이지 사례 제작</div>
+        <div class="task sub">캠페인 화면 캡처 정리</div>
+        <div class="task note">성과 그래프 제작</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 1 · 성과 사례화</span>
+        </div>
+        <div class="task">정기 운영 제안서 업데이트</div>
+        <div class="task sub">업종별 적용 포인트 작성</div>
+        <div class="task note">FAQ 보완</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 1 · 성과 사례화</span>
+        </div>
+        <div class="task">사례 기반 영업 리스트 작성</div>
+        <div class="task sub">확장 타깃 우선순위 설정</div>
+        <div class="task note">주간 리포트</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 2 · 확장 영업</span>
+        </div>
+        <div class="task">동일 브랜드 타 지점/타 캠페인 제안</div>
+        <div class="task sub">오사카/나고야/도쿄 확장안 작성</div>
+        <div class="task note">담당자 재접촉</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 2 · 확장 영업</span>
+        </div>
+        <div class="task">인접 브랜드 신규 접촉</div>
+        <div class="task sub">사례 기반 DM/메일 발송</div>
+        <div class="task note">미팅 후보 일정 조율</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 2 · 확장 영업</span>
+        </div>
+        <div class="task">@cosme/리테일/미디어사 제휴 제안</div>
+        <div class="task sub">OMO 패키지 소개</div>
+        <div class="task note">파트너십 구조 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 2 · 확장 영업</span>
+        </div>
+        <div class="task">확장 미팅 진행</div>
+        <div class="task sub">정기 운영 조건 설명</div>
+        <div class="task note">운영 리소스 범위 협의</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 2 · 확장 영업</span>
+        </div>
+        <div class="task">미팅록/계약 가능성 정리</div>
+        <div class="task sub">A/B/C 등급 업데이트</div>
+        <div class="task note">주간 성과 공유</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 3 · 정기 계약 전환</span>
+        </div>
+        <div class="task">정기 운영 패키지 최종안 작성</div>
+        <div class="task sub">월 운영 범위/KPI/SLA 정리</div>
+        <div class="task note">가격 조건 초안</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 3 · 정기 계약 전환</span>
+        </div>
+        <div class="task">브랜드별 견적/제안서 발송</div>
+        <div class="task sub">계약 조건 질의 대응</div>
+        <div class="task note">내부 확인사항 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 3 · 정기 계약 전환</span>
+        </div>
+        <div class="task">계약 전환 미팅</div>
+        <div class="task sub">성과 기반 설득</div>
+        <div class="task note">다음 캠페인 일정 제안</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 3 · 정기 계약 전환</span>
+        </div>
+        <div class="task">운영 인수인계 구조 설계</div>
+        <div class="task sub">캠페인 캘린더 초안</div>
+        <div class="task note">담당자별 역할 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 3 · 정기 계약 전환</span>
+        </div>
+        <div class="task">정기 운영 후보 정리</div>
+        <div class="task sub">클로징 가능성 평가</div>
+        <div class="task note">리스크/보완점 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">월</span>
+          <span class="week-label">Week 4 · 3개월 총괄 / 다음 분기 계획</span>
+        </div>
+        <div class="task">3개월 누적 KPI 취합</div>
+        <div class="task sub">리드/미팅/파일럿/계약 현황 정리</div>
+        <div class="task note">성과 요약 작성</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">화</span>
+          <span class="week-label">Week 4 · 3개월 총괄 / 다음 분기 계획</span>
+        </div>
+        <div class="task">3개월 최종 리포트 작성</div>
+        <div class="task sub">성과/한계/개선안 정리</div>
+        <div class="task note">다음 분기 방향성 제안</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">수</span>
+          <span class="week-label">Week 4 · 3개월 총괄 / 다음 분기 계획</span>
+        </div>
+        <div class="task">다음 분기 영업 타깃 선정</div>
+        <div class="task sub">업종별 확장 전략 작성</div>
+        <div class="task note">월간 운영 캘린더 설계</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">목</span>
+          <span class="week-label">Week 4 · 3개월 총괄 / 다음 분기 계획</span>
+        </div>
+        <div class="task">내부 전략회의</div>
+        <div class="task sub">정기 계약/추가 PoC 우선순위 확정</div>
+        <div class="task note">리소스/단가 재협의 포인트 정리</div>
+      </div>
+            
+      <div class="day">
+        <div class="day-head">
+          <span class="day-name">금</span>
+          <span class="week-label">Week 4 · 3개월 총괄 / 다음 분기 계획</span>
+        </div>
+        <div class="task">최종 산출물 공유</div>
+        <div class="task sub">다음 분기 액션플랜 제출</div>
+        <div class="task note">성과 인센티브/계약 연장 논의</div>
+      </div>
+            
+  </div>
+  <div class="kpis">
+    
+    <div class="kpi">
+      <div class="num">1건</div>
+      <div class="label">성공사례 문서</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">10건+</div>
+      <div class="label">확장 접촉</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">3건</div>
+      <div class="label">확장 미팅</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">1건+</div>
+      <div class="label">정기 계약 후보</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">1건</div>
+      <div class="label">3개월 총괄 리포트</div>
+    </div>
+        
+    <div class="kpi">
+      <div class="num">1안</div>
+      <div class="label">다음 분기 전략</div>
+    </div>
+        
+  </div>
+</section>
+    
+<section class="summary">
+  <h2>3개월 프로젝트 최종 목표</h2>
+  <p>
+    1개월차에는 DPromotion 에디터 실습과 K-뷰티 브랜드 첫 접촉을 통해 파일럿 미팅을 확보하고,
+    2개월차에는 파일럿 캠페인 제안 및 실제 운영/성과 리포트까지 진행합니다.
+    3개월차에는 파일럿 성과를 일본어 사례 자료로 전환하여 정기 계약과 추가 브랜드 확장 영업으로 연결합니다.
+  </p>
+</section>
+</div>
+<script>
+// ─── 데이터 수집 ──────────────────────────────────────────────
+function collectMonthData() {
+  const months = [];
+  document.querySelectorAll('.month-block').forEach(block => {
+    const style = block.getAttribute('style') || '';
+    const accentMatch = style.match(/--accent:\s*#([0-9A-Fa-f]{6})/);
+    const softMatch   = style.match(/--soft:\s*#([0-9A-Fa-f]{6})/);
+    const accent = accentMatch ? accentMatch[1] : '6C63FF';
+    const soft   = softMatch   ? softMatch[1]   : 'EEF0FF';
+
+    const badge = block.querySelector('.month-badge')?.textContent.trim() || '';
+    const title = block.querySelector('.month-title h2')?.textContent.trim() || '';
+    const goal  = block.querySelector('.month-goal')?.textContent.trim() || '';
+
+    const weeksMap = {}, weekOrder = [];
+    block.querySelectorAll('.day').forEach(day => {
+      const weekLabel = day.querySelector('.week-label')?.textContent.trim() || '';
+      const dayName   = day.querySelector('.day-name')?.textContent.trim() || '';
+      const tasks = [];
+      day.querySelectorAll('.task').forEach(task => {
+        tasks.push({
+          text: task.textContent.trim(),
+          type: task.classList.contains('sub') ? 'sub'
+              : task.classList.contains('note') ? 'note' : 'main',
+        });
+      });
+      if (!weeksMap[weekLabel]) { weeksMap[weekLabel] = []; weekOrder.push(weekLabel); }
+      weeksMap[weekLabel].push({ dayName, tasks });
+    });
+
+    const kpis = [];
+    block.querySelectorAll('.kpi').forEach(kpi => {
+      kpis.push({
+        num:   kpi.querySelector('.num')?.textContent.trim() || '',
+        label: kpi.querySelector('.label')?.textContent.trim() || '',
+      });
+    });
+
+    months.push({
+      badge, title, goal, kpis, accent, soft,
+      weeks: weekOrder.map(label => ({ label, days: weeksMap[label] })),
+    });
+  });
+  return months;
+}
+
+// ─── PPT 생성 ──────────────────────────────────────────────────
+async function downloadPPT() {
+  const btn = document.getElementById('pptBtn');
+  btn.disabled = true;
+  btn.textContent = '생성 중...';
+
+  try {
+    const pptx = new PptxGenJS();
+    pptx.layout  = 'LAYOUT_WIDE'; // 10" × 5.625"
+    pptx.title   = 'DPromotion 3개월 프로젝트 달력 대시보드';
+    pptx.author  = 'DPromotion';
+
+    const W = 10, H = 5.625;
+    const FONT = 'Malgun Gothic';
+    const C = {
+      dark:   '1A1A2E', white:  'FFFFFF', bg:     'F4F5F7',
+      muted:  '6B7280', text:   '111827', border: 'E5E7EB',
+      light:  'F9FAFB', purple: 'C4B5FD', gray:   'E5E7EB',
+      tag:    '2D2B4E', m1: '6C63FF', m2: '00B89C', m3: 'FF6B6B',
+    };
+    const R = pptx.shapes.RECTANGLE;
+    const RR = pptx.shapes.ROUNDED_RECTANGLE;
+
+    // ── 슬라이드 1: 타이틀 ───────────────────────────────────
+    {
+      const s = pptx.addSlide();
+      s.background = { color: C.dark };
+
+      s.addShape(R, { x:0, y:0, w:0.07, h:H, fill:{color:C.m1}, line:{width:0} });
+
+      s.addText('DPromotion × Japan OMO Consulting', {
+        x:0.35, y:0.85, w:9.3, h:0.35,
+        fontFace:FONT, fontSize:10, color:C.purple, bold:true, charSpacing:1.5,
+      });
+      s.addText('3개월 프로젝트 달력 대시보드', {
+        x:0.35, y:1.28, w:9.3, h:1.1,
+        fontFace:FONT, fontSize:34, color:C.white, bold:true,
+      });
+      s.addText('K-뷰티 일본 영업 · 팝업 캠페인 운영 · 이커머스 O2O 전환 전략을\n1개월차, 2개월차, 3개월차 실행 달력으로 정리', {
+        x:0.35, y:2.5, w:9.3, h:0.9,
+        fontFace:FONT, fontSize:13, color:C.gray,
+      });
+
+      const tags = [
+        'Month 1: 준비 + 첫 접촉', 'Month 2: 파일럿 제안 + 운영', 'Month 3: 사례화 + 확장 영업',
+        'DPromotion', 'K-Beauty Japan',
+      ];
+      tags.forEach((tag, i) => {
+        const col = i % 3, row = Math.floor(i / 3);
+        const tx = 0.35 + col * 2.95, ty = 3.6 + row * 0.48;
+        s.addShape(RR, {
+          x:tx, y:ty, w:2.75, h:0.34,
+          fill:{color:C.tag}, line:{color:'4B4880', width:0.75}, rectRadius:0.5,
+        });
+        s.addText(tag, {
+          x:tx, y:ty, w:2.75, h:0.34,
+          fontFace:FONT, fontSize:9, color:C.white, bold:true,
+          align:'center', valign:'middle',
+        });
+      });
+    }
+
+    // ── 슬라이드 2: 3개월 전체 구조 ─────────────────────────
+    {
+      const s = pptx.addSlide();
+      s.background = { color: C.bg };
+
+      s.addText('3개월 전체 구조', {
+        x:0.35, y:0.2, w:9.3, h:0.55,
+        fontFace:FONT, fontSize:22, color:C.text, bold:true,
+      });
+      s.addText('월별 역할을 분리해 업무 범위와 기대 산출물이 명확하게 보이도록 구성했습니다.', {
+        x:0.35, y:0.8, w:9.3, h:0.3,
+        fontFace:FONT, fontSize:10, color:C.muted,
+      });
+
+      const cards = [
+        { accent:C.m1, badge:'1개월차', title:'준비 + 첫 접촉',
+          desc:'DPromotion 에디터 실습, K-뷰티 타깃 브랜드 선별, 일본어 제안서 정리, DM/메일 발송, 첫 미팅 확보' },
+        { accent:C.m2, badge:'2개월차', title:'파일럿 제안 + 캠페인 운영',
+          desc:'브랜드 1~2곳과 파일럿 조건 협의, 팝업 캠페인 시나리오 확정, QR/룰렛/퀴즈 운영안 제작, 성과 측정 구조 세팅' },
+        { accent:C.m3, badge:'3개월차', title:'사례화 + 확장 영업',
+          desc:'파일럿 성과를 사례화하고, 동일 브랜드 확장/인접 브랜드 영업/정기 계약 전환까지 연결' },
+      ];
+      const CW = 2.95, CH = 3.9;
+      cards.forEach((card, i) => {
+        const x = 0.35 + i * (CW + 0.2);
+        s.addShape(RR, { x, y:1.2, w:CW, h:CH, fill:{color:C.white}, line:{color:C.border, width:0.75}, rectRadius:0.1 });
+        s.addShape(R,  { x, y:1.2, w:CW, h:0.1, fill:{color:card.accent}, line:{width:0} });
+        s.addShape(RR, { x:x+0.15, y:1.42, w:1.0, h:0.28, fill:{color:card.accent}, line:{width:0}, rectRadius:0.5 });
+        s.addText(card.badge, {
+          x:x+0.15, y:1.42, w:1.0, h:0.28,
+          fontFace:FONT, fontSize:9, color:C.white, bold:true, align:'center', valign:'middle',
+        });
+        s.addText(card.title, {
+          x:x+0.15, y:1.84, w:CW-0.3, h:0.55,
+          fontFace:FONT, fontSize:13, color:C.text, bold:true,
+        });
+        s.addText(card.desc, {
+          x:x+0.15, y:2.46, w:CW-0.3, h:2.5,
+          fontFace:FONT, fontSize:9.5, color:C.muted, wrap:true, valign:'top',
+        });
+      });
+    }
+
+    // ── 월별 슬라이드 ────────────────────────────────────────
+    collectMonthData().forEach(month => {
+      const acc = month.accent, sft = month.soft;
+
+      // 주차별 슬라이드 (주당 1장, 5개 요일 컬럼)
+      month.weeks.forEach(({ label, days }) => {
+        const s = pptx.addSlide();
+        s.background = { color: C.bg };
+
+        s.addShape(R, { x:0, y:0, w:W, h:0.65, fill:{color:acc}, line:{width:0} });
+        s.addText(`${month.badge} · ${month.title}`, {
+          x:0.3, y:0, w:5.5, h:0.65,
+          fontFace:FONT, fontSize:15, color:C.white, bold:true, valign:'middle',
+        });
+        s.addText(label, {
+          x:5.8, y:0, w:3.9, h:0.65,
+          fontFace:FONT, fontSize:11, color:'CCCCCC', bold:true,
+          align:'right', valign:'middle',
+        });
+
+        const CW = 1.85, GAP = 0.075;
+        const SX = (W - (5*CW + 4*GAP)) / 2;
+
+        days.forEach((day, di) => {
+          const cx = SX + di * (CW + GAP);
+          const cy = 0.75, colH = H - cy - 0.05;
+
+          s.addShape(RR, {
+            x:cx, y:cy, w:CW, h:colH,
+            fill:{color:C.white}, line:{color:C.border, width:0.75}, rectRadius:0.08,
+          });
+          s.addText(day.dayName, {
+            x:cx+0.1, y:cy+0.07, w:CW-0.2, h:0.3,
+            fontFace:FONT, fontSize:12, color:C.text, bold:true,
+          });
+          s.addShape(R, {
+            x:cx+0.1, y:cy+0.42, w:CW-0.2, h:0.012,
+            fill:{color:C.border}, line:{width:0},
+          });
+
+          day.tasks.forEach((task, ti) => {
+            const TH = 1.2, ty = cy + 0.5 + ti * (TH + 0.07);
+            if (ty + TH > H - 0.08) return;
+            const taskBg    = task.type === 'main' ? sft : task.type === 'sub' ? C.light : 'FFFBEB';
+            const taskColor = task.type === 'main' ? acc : task.type === 'sub' ? '374151' : '92400E';
+            s.addShape(RR, {
+              x:cx+0.08, y:ty, w:CW-0.16, h:TH,
+              fill:{color:taskBg}, line:{width:0}, rectRadius:0.07,
+            });
+            s.addText(task.text, {
+              x:cx+0.11, y:ty+0.06, w:CW-0.22, h:TH-0.12,
+              fontFace:FONT, fontSize:8.5, color:taskColor,
+              bold: task.type === 'main', wrap:true, valign:'top',
+            });
+          });
+        });
+      });
+
+      // KPI 슬라이드
+      {
+        const s = pptx.addSlide();
+        s.background = { color: C.bg };
+
+        s.addShape(R, { x:0, y:0, w:W, h:0.65, fill:{color:acc}, line:{width:0} });
+        s.addText(`${month.badge} · 월간 KPI 목표`, {
+          x:0.3, y:0, w:9.4, h:0.65,
+          fontFace:FONT, fontSize:16, color:C.white, bold:true, valign:'middle',
+        });
+        s.addText(month.goal, {
+          x:0.3, y:0.78, w:9.4, h:0.45,
+          fontFace:FONT, fontSize:10, color:C.muted, wrap:true,
+        });
+
+        const KW = 1.45, KH = 1.5, KG = 0.12;
+        month.kpis.forEach((kpi, ki) => {
+          const col = ki % 6, row = Math.floor(ki / 6);
+          const kx = 0.25 + col * (KW + KG);
+          const ky = 1.38 + row * (KH + 0.15);
+          s.addShape(RR, {
+            x:kx, y:ky, w:KW, h:KH,
+            fill:{color:C.white}, line:{color:C.border, width:0.75}, rectRadius:0.1,
+          });
+          s.addText(kpi.num, {
+            x:kx, y:ky+0.22, w:KW, h:0.65,
+            fontFace:FONT, fontSize:20, color:acc, bold:true, align:'center',
+          });
+          s.addText(kpi.label, {
+            x:kx+0.05, y:ky+0.9, w:KW-0.1, h:0.5,
+            fontFace:FONT, fontSize:9, color:C.muted, align:'center', wrap:true,
+          });
+        });
+      }
+    });
+
+    // ── 마지막 슬라이드: 요약 ────────────────────────────────
+    {
+      const summary   = document.querySelector('.summary');
+      const sumTitle  = summary?.querySelector('h2')?.textContent.trim() || '3개월 프로젝트 최종 목표';
+      const sumText   = summary?.querySelector('p')?.textContent.trim()  || '';
+
+      const s = pptx.addSlide();
+      s.background = { color: '111827' };
+
+      s.addText(sumTitle, {
+        x:0.5, y:0.5, w:9, h:0.7,
+        fontFace:FONT, fontSize:26, color:C.white, bold:true,
+      });
+      s.addShape(R, { x:0.5, y:1.28, w:9, h:0.04, fill:{color:C.m1}, line:{width:0} });
+      s.addText(sumText, {
+        x:0.5, y:1.45, w:9, h:3.8,
+        fontFace:FONT, fontSize:13, color:'E5E7EB', wrap:true, valign:'top',
+      });
+      s.addShape(R, { x:0, y:H-0.3, w:W, h:0.3, fill:{color:C.m1}, line:{width:0} });
+      s.addText('DPromotion × Japan OMO Consulting', {
+        x:0.3, y:H-0.3, w:9.4, h:0.3,
+        fontFace:FONT, fontSize:10, color:C.white, bold:true, valign:'middle',
+      });
+    }
+
+    await pptx.writeFile({ fileName: 'DPromotion_3month_project_dashboard.pptx' });
+
+  } catch (err) {
+    console.error('PPT 생성 오류:', err);
+    alert('PPT 생성 중 오류가 발생했습니다.\n' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'PPT 다운로드';
+  }
+}
+
+</script>
+</body>
+</html>
