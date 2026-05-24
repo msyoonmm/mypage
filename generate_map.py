@@ -73,15 +73,15 @@ ax.add_patch(MplPolygon(kouri, closed=True,
                           linewidth=1.5, zorder=2))
 
 # ── Sea labels ────────────────────────────────────────────────────────────
-ax.text(127.53, 26.52, '동중국해', fontsize=11, color='#4A90A4',
+ax.text(127.53, 26.52, '동중국해', fontsize=14, color='#4A90A4',
         fontstyle='italic', alpha=0.75, zorder=3)
-ax.text(128.38, 26.50, '태평양', fontsize=11, color='#4A90A4',
+ax.text(128.38, 26.50, '태평양', fontsize=14, color='#4A90A4',
         fontstyle='italic', alpha=0.75, zorder=3)
 
 # ── Bridges ───────────────────────────────────────────────────────────────
 ax.plot([127.980, 128.006], [26.699, 26.718],
         color='#8B6914', linewidth=2, linestyle='--', zorder=3, alpha=0.8)
-ax.text(127.968, 26.707, '고우리대교', fontsize=6.5, color='#8B6914',
+ax.text(127.968, 26.707, '고우리대교', fontsize=9, fontweight='bold', color='#8B6914',
         ha='center', zorder=4)
 ax.plot([127.862, 127.870], [26.648, 26.650],
         color='#8B6914', linewidth=2, linestyle='--', zorder=3, alpha=0.8)
@@ -154,49 +154,49 @@ locations = [
 ]
 
 for lon, lat, lines, color, tx, ty, ha, va in locations:
-    ax.add_patch(plt.Circle((lon, lat), 0.010,
+    ax.add_patch(plt.Circle((lon, lat), 0.013,
                              facecolor=color, edgecolor='white',
-                             linewidth=2.2, zorder=6))
+                             linewidth=2.5, zorder=6))
     ax.annotate(
         '\n'.join(lines),
         xy=(lon, lat), xytext=(tx, ty),
-        fontsize=8.5, ha=ha, va=va,
-        bbox=dict(boxstyle='round,pad=0.45', facecolor='white',
-                  edgecolor=color, alpha=0.95, linewidth=1.8),
-        arrowprops=dict(arrowstyle='-', color=color, lw=1.3),
+        fontsize=11, fontweight='bold', ha=ha, va=va,
+        bbox=dict(boxstyle='round,pad=0.55', facecolor='white',
+                  edgecolor=color, alpha=0.95, linewidth=2.0),
+        arrowprops=dict(arrowstyle='-', color=color, lw=1.5),
         zorder=8,
         linespacing=1.5,
     )
 
 # ── Extra map decorations ─────────────────────────────────────────────────
 ax.text(128.265, 26.883, '▲ 헤도곶 (최북단)',
-        fontsize=7.5, ha='center', color='#444', zorder=5,
+        fontsize=10, fontweight='bold', ha='center', color='#444', zorder=5,
         bbox=dict(boxstyle='round', facecolor='#FFFDE7',
                   edgecolor='#aaa', alpha=0.88, linewidth=1))
 
-ax.text(127.828, 26.665, '세소코\n비치', fontsize=6.5, ha='center',
+ax.text(127.828, 26.665, '세소코\n비치', fontsize=9, fontweight='bold', ha='center',
         color='#0277BD', fontstyle='italic', zorder=5)
 
 # ── Title ─────────────────────────────────────────────────────────────────
 ax.text(0.50, 0.993, '오키나와 3박4일 여행 코스',
-        transform=ax.transAxes, fontsize=21, fontweight='bold',
+        transform=ax.transAxes, fontsize=26, fontweight='bold',
         ha='center', va='top', color='#1A237E',
-        path_effects=[pe.withStroke(linewidth=4, foreground='white')])
-ax.text(0.50, 0.977, '5월 26일(화) ~ 5월 29일(금)  |  세소코섬 빌라 베이스',
-        transform=ax.transAxes, fontsize=11.5, ha='center', va='top',
+        path_effects=[pe.withStroke(linewidth=5, foreground='white')])
+ax.text(0.50, 0.975, '5월 26일(화) ~ 5월 29일(금)  |  세소코섬 빌라 베이스',
+        transform=ax.transAxes, fontsize=14, fontweight='bold', ha='center', va='top',
         color='#37474F',
-        path_effects=[pe.withStroke(linewidth=2, foreground='white')])
+        path_effects=[pe.withStroke(linewidth=3, foreground='white')])
 
 # ── North arrow ────────────────────────────────────────────────────────────
 ax.annotate('', xy=(0.965, 0.17), xytext=(0.965, 0.12),
             xycoords='axes fraction',
             arrowprops=dict(arrowstyle='->', color='#333', lw=2.2))
 ax.text(0.965, 0.18, 'N', transform=ax.transAxes,
-        fontsize=13, fontweight='bold', ha='center', color='#333')
+        fontsize=17, fontweight='bold', ha='center', color='#333')
 
 # ── Scale bar ──────────────────────────────────────────────────────────────
 ax.plot([128.30, 128.40], [26.100, 26.100], color='#333', lw=3, zorder=5)
-ax.text(128.35, 26.082, '약 10km', fontsize=8, ha='center', color='#333', zorder=5)
+ax.text(128.35, 26.082, '약 10km', fontsize=11, fontweight='bold', ha='center', color='#333', zorder=5)
 
 # ── Legend panel — 2행 3열 그리드 ────────────────────────────────────────
 # 행 1: Day1, Day2, Day3  /  행 2: Day4, 숙소
@@ -210,7 +210,7 @@ legend_data = [
 
 # 타이틀
 ax_leg.text(0.50, 0.97, '■ 일정 범례',
-            transform=ax_leg.transAxes, fontsize=10.5, fontweight='bold',
+            transform=ax_leg.transAxes, fontsize=13, fontweight='bold',
             ha='center', va='top', color='#1A237E')
 
 # 그리드: 3열 × 2행
@@ -241,12 +241,12 @@ for i, (color, day_lbl, detail_lbl) in enumerate(legend_data):
     # 굵은 날짜 라벨
     ax_leg.text(x0 + rect_w + txt_gap, y0 + 0.05, day_lbl,
                 transform=ax_leg.transAxes,
-                fontsize=9, fontweight='bold', va='center', color=color)
+                fontsize=11, fontweight='bold', va='center', color=color)
 
     # 일반 설명
-    ax_leg.text(x0 + rect_w + txt_gap, y0 - 0.13, detail_lbl,
+    ax_leg.text(x0 + rect_w + txt_gap, y0 - 0.14, detail_lbl,
                 transform=ax_leg.transAxes,
-                fontsize=8, va='center', color='#444')
+                fontsize=10, fontweight='bold', va='center', color='#333')
 
 fig.savefig('/home/user/mypage/okinawa_travel_map.png',
             dpi=160, bbox_inches='tight',
