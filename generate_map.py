@@ -18,15 +18,15 @@ fig = plt.figure(figsize=(15, 22))
 fig.patch.set_facecolor('#F0F4F8')
 
 # Map axes: leaves room for legend panel at bottom
-ax = fig.add_axes([0.02, 0.16, 0.96, 0.82])
+ax = fig.add_axes([0.02, 0.22, 0.96, 0.76])
 ax.set_facecolor('#A8D8EA')
 ax.set_xlim(127.42, 128.62)
 ax.set_ylim(26.04, 27.02)
 ax.set_aspect('equal')
 ax.axis('off')
 
-# Legend axes below map (taller)
-ax_leg = fig.add_axes([0.02, 0.01, 0.96, 0.14])
+# Legend axes below map (taller for larger fonts)
+ax_leg = fig.add_axes([0.02, 0.01, 0.96, 0.20])
 ax_leg.axis('off')
 ax_leg.set_facecolor('#EEF2F7')
 ax_leg.add_patch(plt.Rectangle((0, 0), 1, 1, transform=ax_leg.transAxes,
@@ -210,43 +210,42 @@ legend_data = [
 
 # 타이틀
 ax_leg.text(0.50, 0.97, '■ 일정 범례',
-            transform=ax_leg.transAxes, fontsize=13, fontweight='bold',
+            transform=ax_leg.transAxes, fontsize=17, fontweight='bold',
             ha='center', va='top', color='#1A237E')
 
 # 그리드: 3열 × 2행
 cols = 3
-rows = 2
 cell_w = 1.0 / cols
-cell_h = 0.42   # 전체 높이에서 각 행이 차지하는 비율
+cell_h = 0.44   # 행 간격
 
-rect_w  = 0.022   # 색상 박스 너비 (axes fraction)
-rect_h  = 0.28    # 색상 박스 높이
+rect_w  = 0.028   # 색상 박스 너비
+rect_h  = 0.30    # 색상 박스 높이
 pad_l   = 0.015   # 셀 왼쪽 여백
-txt_gap = 0.030   # 박스~텍스트 간격
+txt_gap = 0.035   # 박스~텍스트 간격
 
 for i, (color, day_lbl, detail_lbl) in enumerate(legend_data):
     col = i % cols
     row = i // cols
 
     x0 = col * cell_w + pad_l
-    y0 = 0.72 - row * cell_h   # 첫 행 y 중심
+    y0 = 0.73 - row * cell_h   # 첫 행 y 중심
 
     # 색상 박스
     ax_leg.add_patch(plt.Rectangle(
         (x0, y0 - rect_h / 2), rect_w, rect_h,
         transform=ax_leg.transAxes,
-        facecolor=color, edgecolor='white', linewidth=1.2, zorder=2,
+        facecolor=color, edgecolor='white', linewidth=1.5, zorder=2,
     ))
 
     # 굵은 날짜 라벨
-    ax_leg.text(x0 + rect_w + txt_gap, y0 + 0.05, day_lbl,
+    ax_leg.text(x0 + rect_w + txt_gap, y0 + 0.07, day_lbl,
                 transform=ax_leg.transAxes,
-                fontsize=11, fontweight='bold', va='center', color=color)
+                fontsize=14, fontweight='bold', va='center', color=color)
 
-    # 일반 설명
-    ax_leg.text(x0 + rect_w + txt_gap, y0 - 0.14, detail_lbl,
+    # 설명
+    ax_leg.text(x0 + rect_w + txt_gap, y0 - 0.13, detail_lbl,
                 transform=ax_leg.transAxes,
-                fontsize=10, fontweight='bold', va='center', color='#333')
+                fontsize=13, fontweight='bold', va='center', color='#333')
 
 fig.savefig('/home/user/mypage/okinawa_travel_map.png',
             dpi=160, bbox_inches='tight',
