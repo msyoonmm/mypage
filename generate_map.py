@@ -18,15 +18,15 @@ fig = plt.figure(figsize=(15, 22))
 fig.patch.set_facecolor('#F0F4F8')
 
 # Map axes: leaves room for legend panel at bottom
-ax = fig.add_axes([0.02, 0.13, 0.96, 0.85])
+ax = fig.add_axes([0.02, 0.16, 0.96, 0.82])
 ax.set_facecolor('#A8D8EA')
 ax.set_xlim(127.45, 128.55)
 ax.set_ylim(26.04, 27.02)
 ax.set_aspect('equal')
 ax.axis('off')
 
-# Legend axes below map
-ax_leg = fig.add_axes([0.02, 0.01, 0.96, 0.11])
+# Legend axes below map (taller)
+ax_leg = fig.add_axes([0.02, 0.01, 0.96, 0.14])
 ax_leg.axis('off')
 ax_leg.set_facecolor('#EEF2F7')
 ax_leg.add_patch(plt.Rectangle((0, 0), 1, 1, transform=ax_leg.transAxes,
@@ -194,31 +194,55 @@ ax.text(0.965, 0.18, 'N', transform=ax.transAxes,
 ax.plot([128.30, 128.40], [26.100, 26.100], color='#333', lw=3, zorder=5)
 ax.text(128.35, 26.082, '약 10km', fontsize=8, ha='center', color='#333', zorder=5)
 
-# ── Legend panel (separate axes at bottom) ────────────────────────────────
+# ── Legend panel — 2행 3열 그리드 ────────────────────────────────────────
+# 행 1: Day1, Day2, Day3  /  행 2: Day4, 숙소
 legend_data = [
-    ('#C0392B', 'Day 1  (5/26)   나하 도착 → 세소코 정착'),
-    ('#1565C0', 'Day 2  (5/27)   추라우미 수족관 · 비세 가로수길 · 나키진 성터'),
-    ('#2E7D32', 'Day 3  (5/28)   고우리섬 · 티누 해변 · 세소코 비치'),
-    ('#E65100', 'Day 4  (5/29)   아메리칸 빌리지 · 국제거리 → 귀국'),
-    ('#7B1FA2', '숙소      세소코섬 빌라 (3박 4일)'),
+    ('#C0392B', 'Day 1  (5/26)', '나하 도착 → 세소코 정착'),
+    ('#1565C0', 'Day 2  (5/27)', '추라우미 수족관 · 비세 가로수길 · 나키진 성터'),
+    ('#2E7D32', 'Day 3  (5/28)', '고우리섬 · 티누 해변 · 세소코 비치'),
+    ('#E65100', 'Day 4  (5/29)', '아메리칸 빌리지 · 국제거리 → 귀국'),
+    ('#7B1FA2', '숙소',          '세소코섬 빌라 (3박 4일)'),
 ]
 
-ax_leg.text(0.50, 0.92, '■ 일정 범례',
-            transform=ax_leg.transAxes, fontsize=11, fontweight='bold',
+# 타이틀
+ax_leg.text(0.50, 0.97, '■ 일정 범례',
+            transform=ax_leg.transAxes, fontsize=10.5, fontweight='bold',
             ha='center', va='top', color='#1A237E')
 
-n = len(legend_data)
-col_w = 1.0 / n
-for i, (color, label) in enumerate(legend_data):
-    cx = col_w * i + col_w * 0.12
-    cy = 0.40
-    ax_leg.add_patch(plt.Rectangle((cx, cy - 0.13), 0.04, 0.26,
-                                    transform=ax_leg.transAxes,
-                                    facecolor=color, edgecolor='white',
-                                    linewidth=1, zorder=2))
-    ax_leg.text(cx + 0.055, cy, label,
+# 그리드: 3열 × 2행
+cols = 3
+rows = 2
+cell_w = 1.0 / cols
+cell_h = 0.42   # 전체 높이에서 각 행이 차지하는 비율
+
+rect_w  = 0.022   # 색상 박스 너비 (axes fraction)
+rect_h  = 0.28    # 색상 박스 높이
+pad_l   = 0.015   # 셀 왼쪽 여백
+txt_gap = 0.030   # 박스~텍스트 간격
+
+for i, (color, day_lbl, detail_lbl) in enumerate(legend_data):
+    col = i % cols
+    row = i // cols
+
+    x0 = col * cell_w + pad_l
+    y0 = 0.72 - row * cell_h   # 첫 행 y 중심
+
+    # 색상 박스
+    ax_leg.add_patch(plt.Rectangle(
+        (x0, y0 - rect_h / 2), rect_w, rect_h,
+        transform=ax_leg.transAxes,
+        facecolor=color, edgecolor='white', linewidth=1.2, zorder=2,
+    ))
+
+    # 굵은 날짜 라벨
+    ax_leg.text(x0 + rect_w + txt_gap, y0 + 0.05, day_lbl,
                 transform=ax_leg.transAxes,
-                fontsize=8.5, va='center', color='#222')
+                fontsize=9, fontweight='bold', va='center', color=color)
+
+    # 일반 설명
+    ax_leg.text(x0 + rect_w + txt_gap, y0 - 0.13, detail_lbl,
+                transform=ax_leg.transAxes,
+                fontsize=8, va='center', color='#444')
 
 fig.savefig('/home/user/mypage/okinawa_travel_map.png',
             dpi=160, bbox_inches='tight',
