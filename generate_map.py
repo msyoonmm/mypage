@@ -20,7 +20,7 @@ fig.patch.set_facecolor('#F0F4F8')
 # Map axes: leaves room for legend panel at bottom
 ax = fig.add_axes([0.02, 0.16, 0.96, 0.82])
 ax.set_facecolor('#A8D8EA')
-ax.set_xlim(127.45, 128.55)
+ax.set_xlim(127.42, 128.62)
 ax.set_ylim(26.04, 27.02)
 ax.set_aspect('equal')
 ax.axis('off')
@@ -132,15 +132,15 @@ locations = [
      ['나키진 성터 (유네스코)', 'Day 2 오후'],
      '#1565C0', 128.060, 26.665, 'left', 'center'),
 
-    # Day 3 — 고우리섬
+    # Day 3 — 고우리섬 (라벨을 아래쪽으로)
     (128.016, 26.728,
      ['고우리섬', 'Day 3 오전'],
-     '#2E7D32', 128.130, 26.740, 'left', 'center'),
+     '#2E7D32', 128.130, 26.695, 'left', 'center'),
 
-    # Day 3 — 티누 해변
+    # Day 3 — 티누 해변 (라벨을 위쪽으로 크게 분리)
     (128.021, 26.738,
      ['티누 해변 (하트 바위)', 'Day 3 오전'],
-     '#2E7D32', 128.130, 26.770, 'left', 'center'),
+     '#2E7D32', 128.130, 26.810, 'left', 'center'),
 
     # Day 3 — 아메리칸 빌리지 (오후 이동)
     (127.757, 26.321,
@@ -160,10 +160,10 @@ for lon, lat, lines, color, tx, ty, ha, va in locations:
     ax.annotate(
         '\n'.join(lines),
         xy=(lon, lat), xytext=(tx, ty),
-        fontsize=11, fontweight='bold', ha=ha, va=va,
-        bbox=dict(boxstyle='round,pad=0.55', facecolor='white',
-                  edgecolor=color, alpha=0.95, linewidth=2.0),
-        arrowprops=dict(arrowstyle='-', color=color, lw=1.5),
+        fontsize=13, fontweight='bold', ha=ha, va=va,
+        bbox=dict(boxstyle='round,pad=0.60', facecolor='white',
+                  edgecolor=color, alpha=0.95, linewidth=2.2),
+        arrowprops=dict(arrowstyle='-', color=color, lw=1.8),
         zorder=8,
         linespacing=1.5,
     )
