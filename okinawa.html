@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오키나와 3박4일 여행 코스</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Noto Sans KR', sans-serif; }
+
+    /* ── 히어로 헤더 ── */
+    .hero {
+      background: linear-gradient(135deg, #1A237E 0%, #1565C0 50%, #0288D1 100%);
+      color: white;
+      padding: 60px 0 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('okinawa_travel_map.png') center/cover no-repeat;
+      opacity: 0.08;
+    }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; letter-spacing: -1px; }
+    .hero .subtitle { font-size: 1.1rem; opacity: 0.85; margin-top: 8px; }
+    .badge-flight {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50px;
+      padding: 6px 20px;
+      font-size: 0.9rem;
+      margin: 5px 4px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── 섹션 공통 ── */
+    section { padding: 48px 0; }
+    .section-title {
+      font-size: 1.5rem; font-weight: 900;
+      border-left: 5px solid #1565C0;
+      padding-left: 14px; margin-bottom: 28px;
+    }
+
+    /* ── 다운로드 카드 ── */
+    .dl-card {
+      border: none; border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      transition: transform .2s, box-shadow .2s;
+      overflow: hidden;
+    }
+    .dl-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.16); }
+    .dl-card .card-header {
+      font-size: 1.15rem; font-weight: 700;
+      padding: 20px 24px; border: none;
+    }
+    .dl-card .card-body { padding: 24px; }
+    .dl-card .preview-img {
+      width: 100%; border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .dl-card .file-info {
+      font-size: 0.82rem; color: #888;
+      margin-bottom: 16px;
+    }
+
+    /* ── 다운로드 버튼 ── */
+    .btn-dl {
+      border-radius: 50px; font-weight: 700;
+      padding: 10px 28px; font-size: 0.95rem;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: all .2s;
+    }
+    .btn-dl:hover { transform: scale(1.04); }
+
+    /* ── 색상 헤더 ── */
+    .hdr-pdf  { background: linear-gradient(135deg, #C0392B, #E74C3C); color: white; }
+    .hdr-ppt  { background: linear-gradient(135deg, #D24726, #FF7043); color: white; }
+
+    /* ── 일정 타임라인 ── */
+    .day-card {
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+    .day-header {
+      padding: 14px 22px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .day-badge {
+      font-size: 1.1rem; font-weight: 900; color: white;
+      background: rgba(255,255,255,0.25);
+      border-radius: 50px; padding: 4px 16px;
+      white-space: nowrap;
+    }
+    .day-title { font-size: 1.05rem; font-weight: 700; color: white; }
+    .day-date  { font-size: 0.85rem; color: rgba(255,255,255,0.8); }
+    .day-body  { background: white; }
+    .time-row  {
+      display: flex; align-items: center; gap: 0;
+      border-bottom: 1px solid #f0f0f0;
+      padding: 12px 0;
+    }
+    .time-row:last-child { border-bottom: none; }
+    .time-col {
+      width: 80px; min-width: 80px;
+      font-weight: 700; font-size: 0.88rem;
+      text-align: center; padding: 4px 8px;
+      border-radius: 6px; margin: 0 16px;
+    }
+    .desc-col { font-size: 0.95rem; color: #333; }
+
+    /* ── 지도 ── */
+    .map-section img {
+      width: 100%; border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      cursor: zoom-in;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.88); align-items: center; justify-content: center;
+    }
+    .lightbox-overlay.show { display: flex; }
+    .lightbox-overlay img {
+      max-width: 95vw; max-height: 92vh;
+      border-radius: 10px; cursor: zoom-out;
+    }
+    .lightbox-close {
+      position: absolute; top: 18px; right: 24px;
+      color: white; font-size: 2.2rem; cursor: pointer;
+      font-weight: 700; line-height: 1;
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      background: #1A237E; color: rgba(255,255,255,0.7);
+      text-align: center; padding: 24px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── 히어로 ─────────────────────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="position-relative">
+    <p class="subtitle mb-2">오키나와 여행 플래너</p>
+    <h1>오키나와 3박 4일 여행 코스</h1>
+    <p class="subtitle mt-2">세소코섬 빌라 베이스 &nbsp;|&nbsp; 5월 26일(화) ~ 29일(금)</p>
+    <div class="mt-3">
+      <span class="badge-flight">✈ 출발 5/26 ICN→OKA 11:30 ZE631</span>
+      <span class="badge-flight">✈ 귀국 5/29 OKA→ICN 15:00 ZE632</span>
+      <span class="badge-flight">🏠 예약번호: VFZ8ME</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── 다운로드 ───────────────────────────────────────────────────────────── -->
+<section style="background:#F8F9FC;">
+  <div class="container">
+    <div class="section-title">파일 다운로드</div>
+    <div class="row g-4">
+
+      <!-- PDF 일정표 -->
+      <div class="col-md-6">
+        <div class="dl-card card h-100">
+          <div class="card-header hdr-pdf">
+            📄&nbsp; 인쇄용 일정표 &nbsp;<small style="font-weight:400;font-size:.85rem;">(A4 PDF)</small>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <img src="okinawa_schedule.png" class="preview-img"
+                 onclick="openLightbox(this.src)" alt="일정표 미리보기">
+            <p class="file-info mb-0">📎 okinawa_schedule.pdf &nbsp;·&nbsp; A4 세로 &nbsp;·&nbsp; 인쇄 최적화</p>
+            <div class="mt-auto pt-3 d-flex gap-2 flex-wrap">
+              <a href="okinawa_schedule.pdf" download class="btn btn-danger btn-dl">
+                ⬇ PDF 다운로드
+              </a>
+              <a href="okinawa_schedule.png" download class="btn btn-outline-danger btn-dl">
+                🖼 이미지 저장
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PPT -->
+      <div class="col-md-6">
+        <div class="dl-card card h-100">
+          <div class="card-header hdr-ppt">
+            📊&nbsp; 프레젠테이션 &nbsp;<small style="font-weight:400;font-size:.85rem;">(PowerPoint)</small>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <!-- PPT 미리보기: 슬라이드 구성 시각화 -->
+            <div class="ppt-preview mb-3" style="background:#1A237E;border-radius:10px;padding:20px;color:white;">
+              <div style="font-size:1.6rem;font-weight:900;line-height:1.2;">오키나와<br>3박 4일 여행 코스</div>
+              <div style="font-size:.85rem;margin-top:10px;opacity:.8;">5월 26일(화) ~ 5월 29일(금)</div>
+              <div style="display:flex;gap:6px;margin-top:14px;flex-wrap:wrap;">
+                <span style="background:#C0392B;border-radius:4px;padding:3px 10px;font-size:.75rem;font-weight:700;">Day 1</span>
+                <span style="background:#1565C0;border-radius:4px;padding:3px 10px;font-size:.75rem;font-weight:700;">Day 2</span>
+                <span style="background:#2E7D32;border-radius:4px;padding:3px 10px;font-size:.75rem;font-weight:700;">Day 3</span>
+                <span style="background:#E65100;border-radius:4px;padding:3px 10px;font-size:.75rem;font-weight:700;">Day 4</span>
+                <span style="background:#7B1FA2;border-radius:4px;padding:3px 10px;font-size:.75rem;font-weight:700;">숙소+팁</span>
+                <span style="background:#0277BD;border-radius:4px;padding:3px 10px;font-size:.75rem;font-weight:700;">지도</span>
+              </div>
+              <div style="font-size:.78rem;margin-top:14px;opacity:.65;">총 7슬라이드 &nbsp;·&nbsp; 16:9 와이드스크린</div>
+            </div>
+            <p class="file-info mb-0">📎 okinawa_trip.pptx &nbsp;·&nbsp; 7 슬라이드 &nbsp;·&nbsp; 16:9 와이드</p>
+            <div class="mt-auto pt-3">
+              <a href="okinawa_trip.pptx" download class="btn btn-dl w-100"
+                 style="background:#D24726;color:white;">
+                ⬇ PowerPoint 다운로드
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 여행 지도 ──────────────────────────────────────────────────────────── -->
+<section class="map-section">
+  <div class="container">
+    <div class="section-title">여행 코스 지도</div>
+    <img src="okinawa_travel_map.png" alt="오키나와 여행 지도" onclick="openLightbox(this.src)">
+    <p class="text-muted mt-2" style="font-size:.85rem;">🔍 클릭하면 크게 볼 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- ── 일정 요약 ──────────────────────────────────────────────────────────── -->
+<section style="background:#F8F9FC;">
+  <div class="container">
+    <div class="section-title">일정 요약</div>
+
+    <!-- Day 1 -->
+    <div class="day-card">
+      <div class="day-header" style="background:linear-gradient(90deg,#C0392B,#E74C3C);">
+        <span class="day-badge">Day 1</span>
+        <div>
+          <div class="day-title">나하 도착 → 세소코 정착</div>
+          <div class="day-date">5월 26일 (화)</div>
+        </div>
+      </div>
+      <div class="day-body px-2">
+        <div class="time-row"><span class="time-col" style="background:#FFEBEE;color:#C0392B;">14:00</span><span class="desc-col">나하 공항 도착 / 렌터카 수령</span></div>
+        <div class="time-row"><span class="time-col" style="background:#FFEBEE;color:#C0392B;">14:30</span><span class="desc-col">오키나와 자동차도로 북상 (약 1시간 30분)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#FFEBEE;color:#C0392B;">16:30</span><span class="desc-col">세소코섬 빌라 체크인</span></div>
+        <div class="time-row"><span class="time-col" style="background:#FFEBEE;color:#C0392B;">17:30</span><span class="desc-col">세소코 비치 산책 & 석양 감상</span></div>
+        <div class="time-row"><span class="time-col" style="background:#FFEBEE;color:#C0392B;">19:00</span><span class="desc-col">모토부 현지 식당 저녁 (오키나와 소바 추천)</span></div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-card">
+      <div class="day-header" style="background:linear-gradient(90deg,#1565C0,#1E88E5);">
+        <span class="day-badge">Day 2</span>
+        <div>
+          <div class="day-title">북부 핵심 관광</div>
+          <div class="day-date">5월 27일 (수)</div>
+        </div>
+      </div>
+      <div class="day-body px-2">
+        <div class="time-row"><span class="time-col" style="background:#E3F2FD;color:#1565C0;">08:30</span><span class="desc-col">추라우미 수족관 (세계 최대급 / 빌라에서 10분)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E3F2FD;color:#1565C0;">11:00</span><span class="desc-col">오션 엑스포 공원 관람</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E3F2FD;color:#1565C0;">13:00</span><span class="desc-col">비세 후쿠기 가로수길 근처 카페 점심</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E3F2FD;color:#1565C0;">14:00</span><span class="desc-col">비세 후쿠기 가로수길 (수백 년 나무 터널)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E3F2FD;color:#1565C0;">15:30</span><span class="desc-col">나키진 성터 (유네스코 세계문화유산 / 바다 전망)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E3F2FD;color:#1565C0;">18:00</span><span class="desc-col">세소코 귀환 / 모토부 항구 해산물 저녁</span></div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-card">
+      <div class="day-header" style="background:linear-gradient(90deg,#2E7D32,#43A047);">
+        <span class="day-badge">Day 3</span>
+        <div>
+          <div class="day-title">고우리섬 & 아메리칸 빌리지 쇼핑</div>
+          <div class="day-date">5월 28일 (목)</div>
+        </div>
+      </div>
+      <div class="day-body px-2">
+        <div class="time-row"><span class="time-col" style="background:#E8F5E9;color:#2E7D32;">09:00</span><span class="desc-col">고우리 대교 드라이브 (에메랄드 바다 위 2km 다리)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E8F5E9;color:#2E7D32;">09:30</span><span class="desc-col">티누 해변 (하트 바위 포토스팟)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E8F5E9;color:#2E7D32;">11:00</span><span class="desc-col">고우리섬 점심 (고우리 새우 요리)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E8F5E9;color:#2E7D32;">13:00</span><span class="desc-col">아메리칸 빌리지 쇼핑몰 이동 (약 1시간 30분)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E8F5E9;color:#2E7D32;">14:30</span><span class="desc-col">아메리칸 빌리지 쇼핑 & 포토스팟</span></div>
+        <div class="time-row"><span class="time-col" style="background:#E8F5E9;color:#2E7D32;">18:00</span><span class="desc-col">세소코 귀환</span></div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-card">
+      <div class="day-header" style="background:linear-gradient(90deg,#E65100,#FB8C00);">
+        <span class="day-badge">Day 4</span>
+        <div>
+          <div class="day-title">국제거리 관광 → 귀국</div>
+          <div class="day-date">5월 29일 (금)</div>
+        </div>
+      </div>
+      <div class="day-body px-2">
+        <div class="time-row"><span class="time-col" style="background:#FFF3E0;color:#E65100;">08:00</span><span class="desc-col">세소코 빌라 체크아웃 / 남하 시작</span></div>
+        <div class="time-row"><span class="time-col" style="background:#FFF3E0;color:#E65100;">10:00</span><span class="desc-col">국제거리 쇼핑 (기념품)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#FFF3E0;color:#E65100;">11:00</span><span class="desc-col">마키시 공설시장 점심 (2층 해산물 정식)</span></div>
+        <div class="time-row"><span class="time-col" style="background:#FFF3E0;color:#E65100;">12:45</span><span class="desc-col">렌터카 반납 & 나하 공항 이동</span></div>
+        <div class="time-row"><span class="time-col" style="background:#FFF3E0;color:#E65100;">13:00</span><span class="desc-col">나하 공항 도착 / 탑승 수속</span></div>
+        <div class="time-row"><span class="time-col" style="background:#FFF3E0;color:#E65100;">15:00</span><span class="desc-col">✈ OKA 출발 → ICN 17:35 도착</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 다시 다운로드 CTA ──────────────────────────────────────────────────── -->
+<section style="background:#1A237E;text-align:center;padding:40px 0;">
+  <div class="container">
+    <h3 style="color:white;font-weight:900;margin-bottom:20px;">파일 다운로드</h3>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="okinawa_schedule.pdf" download
+         class="btn btn-light btn-lg btn-dl" style="font-weight:700;">
+        📄 일정표 PDF
+      </a>
+      <a href="okinawa_trip.pptx" download
+         class="btn btn-dl btn-lg" style="background:#D24726;color:white;font-weight:700;">
+        📊 PowerPoint
+      </a>
+      <a href="okinawa_travel_map.png" download
+         class="btn btn-outline-light btn-dl btn-lg">
+        🗺 지도 이미지
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 푸터 ──────────────────────────────────────────────────────────────── -->
+<footer>
+  오키나와 여행 플래너 &nbsp;|&nbsp; 5/26~5/29 &nbsp;|&nbsp; 예약번호: VFZ8ME &nbsp;|&nbsp; Eastar Jet ZE631 / ZE632
+</footer>
+
+<!-- ── Lightbox ──────────────────────────────────────────────────────────── -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('show');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('show');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
