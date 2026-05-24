@@ -91,14 +91,18 @@ ax.plot([127.862, 127.870], [26.648, 26.650],
 ax.annotate('', xy=(127.848, 26.638), xytext=(127.645, 26.195),
             arrowprops=dict(arrowstyle='->', color='#C0392B',
                             lw=1.8, connectionstyle='arc3,rad=0.28'), zorder=4)
-# Day 4: 세소코 → 아메리칸 빌리지
-ax.annotate('', xy=(127.757, 26.321), xytext=(127.848, 26.638),
+# Day 3: 고우리섬 → 아메리칸 빌리지 (북→남)
+ax.annotate('', xy=(127.757, 26.321), xytext=(128.016, 26.728),
+            arrowprops=dict(arrowstyle='->', color='#2E7D32',
+                            lw=1.8, connectionstyle='arc3,rad=0.30'), zorder=4)
+# Day 4: 세소코 → 국제거리/공항
+ax.annotate('', xy=(127.668, 26.219), xytext=(127.848, 26.638),
             arrowprops=dict(arrowstyle='->', color='#E65100',
-                            lw=1.8, connectionstyle='arc3,rad=-0.22'), zorder=4)
-# Day 4: 아메리칸 빌리지 → 공항
-ax.annotate('', xy=(127.650, 26.200), xytext=(127.757, 26.321),
+                            lw=1.8, connectionstyle='arc3,rad=-0.15'), zorder=4)
+# Day 4: 국제거리 → 공항
+ax.annotate('', xy=(127.645, 26.195), xytext=(127.668, 26.219),
             arrowprops=dict(arrowstyle='->', color='#E65100',
-                            lw=1.8, connectionstyle='arc3,rad=0.12'), zorder=4)
+                            lw=1.5, connectionstyle='arc3,rad=0.0'), zorder=4)
 
 # ── Locations ─────────────────────────────────────────────────────────────
 # (lon, lat, label_lines, dot_color, text_x, text_y, ha, va)
@@ -130,23 +134,23 @@ locations = [
 
     # Day 3 — 고우리섬
     (128.016, 26.728,
-     ['고우리섬', 'Day 3'],
+     ['고우리섬', 'Day 3 오전'],
      '#2E7D32', 128.130, 26.740, 'left', 'center'),
 
     # Day 3 — 티누 해변
     (128.021, 26.738,
-     ['티누 해변 (하트 바위)', 'Day 3'],
+     ['티누 해변 (하트 바위)', 'Day 3 오전'],
      '#2E7D32', 128.130, 26.770, 'left', 'center'),
 
-    # Day 4 — 아메리칸 빌리지
+    # Day 3 — 아메리칸 빌리지 (오후 이동)
     (127.757, 26.321,
-     ['아메리칸 빌리지', 'Day 4 오전'],
-     '#E65100', 127.870, 26.330, 'left', 'center'),
+     ['아메리칸 빌리지 쇼핑몰', 'Day 3 오후'],
+     '#2E7D32', 127.870, 26.330, 'left', 'center'),
 
     # Day 4 — 국제거리 (나하 공항과 분리: 오른쪽 위로)
     (127.668, 26.219,
      ['국제거리 · 마키시 시장', 'Day 4 오전'],
-     '#E65100', 127.820, 26.250, 'left', 'center'),
+     '#E65100', 127.820, 26.255, 'left', 'center'),
 ]
 
 for lon, lat, lines, color, tx, ty, ha, va in locations:
@@ -199,8 +203,8 @@ ax.text(128.35, 26.082, '약 10km', fontsize=8, ha='center', color='#333', zorde
 legend_data = [
     ('#C0392B', 'Day 1  (5/26)', '나하 도착 → 세소코 정착'),
     ('#1565C0', 'Day 2  (5/27)', '추라우미 수족관 · 비세 가로수길 · 나키진 성터'),
-    ('#2E7D32', 'Day 3  (5/28)', '고우리섬 · 티누 해변 · 세소코 비치'),
-    ('#E65100', 'Day 4  (5/29)', '아메리칸 빌리지 · 국제거리 → 귀국'),
+    ('#2E7D32', 'Day 3  (5/28)', '고우리섬 · 티누 해변 → 아메리칸 빌리지 쇼핑'),
+    ('#E65100', 'Day 4  (5/29)', '국제거리 · 마키시 시장 → 귀국'),
     ('#7B1FA2', '숙소',          '세소코섬 빌라 (3박 4일)'),
 ]
 
